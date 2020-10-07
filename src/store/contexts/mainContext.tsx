@@ -2,38 +2,46 @@ import React, { createContext, useReducer } from "react";
 
 import { GlobalReducer } from "../reducers/reducer";
 
-type Players = {
-  runningDealDate: string;
+type UsersType = {
+    id: string
+    score: number
 };
 
+type GameType = {
+    id: string
+}
+
 type InitialStateType = {
-  runningDealDate: Players["runningDealDate"];
+    data: {
+        users: UsersType[]
+        activeGame: GameType[]
+    }
 };
 
 export const initialState = {
-  runningDealDate: "",
+    data: { users: [], activeGame: [] },
 };
 
 const GlobalContext = createContext<{
-  state: InitialStateType;
-  dispatch: React.Dispatch<any>;
+    state: InitialStateType;
+    dispatch: React.Dispatch<any>;
 }>({
-  state: initialState,
-  dispatch: () => null,
+    state: initialState,
+    dispatch: () => null,
 });
 
-const mainReducer = ({ runningDealDate }: InitialStateType, action: any) => ({
-  runningDealDate: GlobalReducer(runningDealDate, action),
+const mainReducer = ({ data }: InitialStateType, action: any) => ({
+    data: GlobalReducer(data, action),
 });
 
 const GlobalProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = useReducer(mainReducer, initialState);
+    const [state, dispatch] = useReducer(mainReducer, initialState);
 
-  return (
-    <GlobalContext.Provider value={{ state, dispatch }}>
-      {children}
-    </GlobalContext.Provider>
-  );
+    return (
+        <GlobalContext.Provider value={{ state, dispatch }}>
+            {children}
+        </GlobalContext.Provider>
+    );
 };
 
 export { GlobalContext, GlobalProvider };
