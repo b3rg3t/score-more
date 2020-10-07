@@ -1,12 +1,17 @@
 import React, { useContext } from "react"
 import { GlobalContext } from "../../store/contexts/mainContext"
+import DisplayActiveGames from "../game/DisplayActiveGame"
+// import Loader from "../Loader"
 
 const Home = () => {
-    const { state, dispatch } = useContext(GlobalContext)
+    
+    const { state } = useContext(GlobalContext)
     console.log(state)
     return (
         <main>
-            <h1>This is home page</h1>
+            <h1>Home</h1>
+            {/* {state.data.activeGame.length > 0 ? <DisplayActiveGames /> : <Loader />} */}
+            <DisplayActiveGames />
         </main>
     )
 }

@@ -1,14 +1,14 @@
 import React from "react"
-import CreateNewGame from "../creategame/CreateNewGame";
+import CreateNewGame from "../game/CreateNewGame";
 
 const ActiveGame = ({ match }: any) => {
-    const { params: { id: agreementId }, } = match;
+    const { params: { id }, } = match;
     
-    console.log(agreementId)
+    console.log(id)
     return (
         <main>
             <h1>Dynamic route</h1>
-            {agreementId}
+            {id}
             <CreateNewGame />
         </main>
     )

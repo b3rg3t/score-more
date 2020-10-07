@@ -1,4 +1,4 @@
-import { initialState } from "../contexts/mainContext";
+// import { initialState } from "../contexts/mainContext";
 
 export const GlobalReducer = (state: any, action: any) => {
   switch (action.type) {
