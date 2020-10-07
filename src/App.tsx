@@ -1,13 +1,31 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
+import Navbar from './components/Navbar';
+import Home from "../src/components/pages/Home"
+import NewGame from "../src/components/pages/NewGame"
+import ActiveGame from "../src/components/pages/ActiveGame"
+
 import './App.scss';
+
+import { GlobalProvider } from './store/contexts/mainContext';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="pl-3">Hello world</h1>
-      </header>
-    </div>
+    <GlobalProvider>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/newgame" component={NewGame} />
+          <Route exact path="/activegame/:id" render={(props) => <ActiveGame {...props} />} />
+        </Switch>
+      </Router>
+    </GlobalProvider>
   );
 }
 
