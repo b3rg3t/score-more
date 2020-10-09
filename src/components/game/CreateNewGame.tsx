@@ -1,13 +1,12 @@
-import React from "react"
-import Select from "react-select"
-
+import React from 'react'
+import CreatePlayer from './CreatePlayers'
 
 const CreateNewGame = () => {
     return (
-        <div>
-            <Select />
+        <div className="d-flex w-100">
+            <CreatePlayer />
         </div>
     )
 }
 
-export default CreateNewGame;
+export default CreateNewGame

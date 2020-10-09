@@ -8,7 +8,7 @@ const ActiveGame = ({ match }: any) => {
 
   console.log(id);
   return (
-    <section>
+    <section className="m-2 d-flex flex-column">
       <h1>Dynamic route</h1>
       {id}
       <CreateNewGame />

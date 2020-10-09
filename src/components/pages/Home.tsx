@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { FaInfo } from "react-icons/fa";
 import { GlobalContext } from "../../store/contexts/mainContext";
-import DisplayActiveGames from "../game/DisplayActiveGame";
+import DisplayActiveGames from "../game/GameList";
 import GithubProfile from "../GithubProfile";
 // import Loader from "../Loader"
 
@@ -10,9 +10,9 @@ const Home = () => {
   const { state } = useContext(GlobalContext);
   console.log(state);
   return (
-    <section>
-      <header className="d-flex justify-content-between align-items-center w-100 px-2 pt-2 pb-0">
-        <h1 className="text-center">Home</h1>
+    <section className="m-2">
+      <header className="d-flex justify-content-between align-items-center w-100 ">
+        <h1 className="text-center w-100">Home</h1>
         <button
           className="box-shadow d-flex align-items-center btn btn-info rounded-circle"
           onClick={() => setShowProfile(showProfile ? false : true)}
