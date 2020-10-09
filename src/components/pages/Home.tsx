@@ -10,7 +10,7 @@ const Home = () => {
   const { state } = useContext(GlobalContext);
   console.log(state);
   return (
-    <section className="m-2">
+    <section className="p-2">
       <header className="d-flex justify-content-between align-items-center w-100 ">
         <h1 className="text-center w-100">Home</h1>
         <button

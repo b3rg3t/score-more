@@ -1,14 +1,22 @@
-import React from 'react'
-import PlayerItem from './PlayerItem'
+import React from "react";
+import PlayerItem from "./PlayerItem";
 
 const PlayerList = () => {
-    return (
-        <div>
-            <ul className="list-unstyled">
-               <PlayerItem /> 
-            </ul>
-        </div>
-    )
-}
+  return (
+      <ul className="list-unstyled overflow-auto m-0">
+        <PlayerItem />
+        <PlayerItem />
+        <PlayerItem />
+        <PlayerItem /> 
+        <PlayerItem />
+        <PlayerItem /> 
+        <PlayerItem /> 
+        <PlayerItem /> 
+        <PlayerItem />
+        <PlayerItem /> 
+        <PlayerItem />
+      </ul>
+  );
+};
 
-export default PlayerList
+export default PlayerList;

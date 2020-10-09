@@ -3,7 +3,7 @@ import CreateNewGame from "../game/CreateNewGame";
 
 const NewGame = () => {
   return (
-    <section className="m-2">
+    <section className="p-2">
       <h1>New Game</h1>
       <CreateNewGame />
     </section>

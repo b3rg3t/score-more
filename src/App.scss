@@ -7,6 +7,10 @@
   position: relative;
 }
 
+.player-list {
+  max-height: 100;
+}
+
 .selectPlayer__multi-value {
   margin: 0;
   &:nth-child(n + 2) {
