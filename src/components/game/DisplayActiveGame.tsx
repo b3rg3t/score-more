@@ -20,7 +20,7 @@ const DisplayActiveGames = (): React.ReactElement => {
 
     return (
         <section>
-            <ul className="list-unstyled">
+            <ul className="list-unstyled m-1">
                 {Games.length ? Games.map((game, index) => <GameCard key={index} game={game} />) : null}
             </ul>
         </section>

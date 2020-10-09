@@ -1,11 +1,11 @@
-import React from "react"
+import React from "react";
 
 const NewGame = () => {
-    return (
-        <main>
-            <h1>New Game</h1>
-        </main>
-    )
-}
+  return (
+    <section>
+      <h1>New Game</h1>
+    </section>
+  );
+};
 
 export default NewGame;

@@ -4,7 +4,7 @@ import { FaGamepad, FaHome, FaUserAlt } from 'react-icons/fa';
 
 const Navbar = () => (
     <nav className="main-shadow w-100 bg-dark">
-        <ul className="list-unstyled d-flex justify-content-between p-1 m-0">
+        <ul className="list-unstyled d-flex justify-content-between py-1 px-2 m-0">
             <li className="p-1">
                 <Link to="/" className="text-white"><FaHome /></Link>
             </li>
