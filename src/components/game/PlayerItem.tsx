@@ -11,7 +11,7 @@ const PlayerItem = () => {
         <button
           className="btn btn-dark btn-sm d-flex align-items-center justify-content-center rounded-circle"
           onClick={() => setCounter((prevState) => prevState - 1)}
-          style={{ width: "34px", height: "34px" }}
+          style={{ width: "26px", height: "26px" }}
         >
           <FaMinus size="1rem" />
         </button>
@@ -19,7 +19,7 @@ const PlayerItem = () => {
         <button
           className="btn btn-dark btn-sm d-flex align-items-center justify-content-center rounded-circle"
           onClick={() => setCounter((prevState) => prevState + 1)}
-          style={{ width: "34px", height: "34px" }}
+          style={{ width: "26px", height: "26px" }}
         >
           <FaPlus />
         </button>

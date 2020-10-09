@@ -11,14 +11,14 @@ const ActiveGame = ({ match }: any) => {
 
   console.log(id);
   return (
-    <section className="player-list d-flex flex-column justify-content-between">
-      <section className="p-2">
+    <section className="player-list">
+      <section className="player-list-section p-2 overflow-auto">
         <h1 className="text-center">
           Dynamic route <code>{id}</code>
         </h1>
         <PlayerList />
       </section>
-      <Footer styling={"bg-dark p-2"}>
+      <Footer styling={"bg-dark p-2 player-list-footer top-shadow"}>
         <nav className="text-white">
           <ul className="list-unstyled d-flex m-0 justify-content-between">
             <li>
