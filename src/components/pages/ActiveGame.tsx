@@ -1,5 +1,6 @@
 import React from "react";
-import CreateNewGame from "../game/CreateNewGame";
+
+import PlayerList from "../game/PlayerList";
 
 const ActiveGame = ({ match }: any) => {
   const {
@@ -9,9 +10,8 @@ const ActiveGame = ({ match }: any) => {
   console.log(id);
   return (
     <section className="m-2 d-flex flex-column">
-      <h1>Dynamic route</h1>
-      {id}
-      <CreateNewGame />
+      <h1 className="text-center">Dynamic route <code>{id}</code></h1>
+      <PlayerList />
     </section>
   );
 };

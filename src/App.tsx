@@ -13,7 +13,7 @@ import { GlobalProvider } from "./store/contexts/mainContext";
 function App() {
   return (
     <GlobalProvider>
-      <main className="d-flex flex-column">
+      <main className="main-content d-flex flex-column">
         <Router>
           <Navbar />
           <Switch>
