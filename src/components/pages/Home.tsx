@@ -7,8 +7,7 @@ import GithubProfile from "../GithubProfile";
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
-  const { state } = useContext(GlobalContext);
-  console.log(state);
+
   return (
     <section className="p-2">
       <header className="d-flex justify-content-between align-items-center w-100 ">
@@ -16,14 +15,12 @@ const Home = () => {
         <button
           className="box-shadow d-flex align-items-center btn btn-info rounded-circle"
           onClick={() => setShowProfile(showProfile ? false : true)}
-          style={{width: "30px", height: "30px"}}
+          style={{ width: "30px", height: "30px" }}
         >
-          <FaInfo size="0.8rem"/>
+          <FaInfo size="0.8rem" />
         </button>
       </header>
       {showProfile ? <GithubProfile /> : null}
-
-      {/* {state.data.activeGame.length > 0 ? <DisplayActiveGames /> : <Loader />} */}
       <DisplayActiveGames />
     </section>
   );

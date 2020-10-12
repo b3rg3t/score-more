@@ -1,47 +1,66 @@
 import React, { createContext, useReducer } from "react";
 
-import { GlobalReducer } from "../reducers/reducer";
+import { GlobalReducer, GameReducer, PlayerReducer } from "../reducers/reducer";
 
-type UsersType = {
-    id: string
-    score: number
+type Users = {
+  value: string;
+  label: string;
+  score: number;
 };
 
-type GameType = {
-    id: string
-}
+type ActiveGameType = {
+  id: string;
+  title: string;
+  playerIds: number[];
+};
+
+type Game = {
+  id: string;
+  title: string;
+  players: string[];
+};
 
 type InitialStateType = {
-    data: {
-        users: UsersType[]
-        activeGame: GameType[]
-    }
+  users: Users[];
+  activeGame: ActiveGameType[];
+  game: { id: string; title: string; players: string[] };
 };
 
 export const initialState = {
-    data: { users: [], activeGame: [] },
+  users: [],
+  activeGame: [],
+  game: {
+    title: "",
+    id: "0",
+    players: [],
+  },
 };
 
 const GlobalContext = createContext<{
-    state: InitialStateType;
-    dispatch: React.Dispatch<any>;
+  state: InitialStateType;
+  dispatch: React.Dispatch<any>;
 }>({
-    state: initialState,
-    dispatch: () => null,
+  state: initialState,
+  dispatch: () => null,
 });
 
-const mainReducer = ({ data }: InitialStateType, action: any) => ({
-    data: GlobalReducer(data, action),
+const mainReducer = (
+  { activeGame, users, game }: InitialStateType,
+  action: any
+) => ({
+  activeGame: GlobalReducer(activeGame, action),
+  users: PlayerReducer(users, action),
+  game: GameReducer(game, action),
 });
 
 const GlobalProvider: React.FC = ({ children }) => {
-    const [state, dispatch] = useReducer(mainReducer, initialState);
+  const [state, dispatch] = useReducer(mainReducer, initialState);
 
-    return (
-        <GlobalContext.Provider value={{ state, dispatch }}>
-            {children}
-        </GlobalContext.Provider>
-    );
+  return (
+    <GlobalContext.Provider value={{ state, dispatch }}>
+      {children}
+    </GlobalContext.Provider>
+  );
 };
 
 export { GlobalContext, GlobalProvider };

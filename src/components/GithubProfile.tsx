@@ -45,12 +45,14 @@ const GithubProfile = () => {
     return <ErrorMessage errorCode={isError} message="Couldn't load user" />;
   } else {
     return (
-      <div className="box-shadow mb-2 text-white bg-dark rounded">
+      <div className="box-shadow mb-2 text-white bg-dark rounded" >
         <div className="row m-1">
           <div className="col-sm-3 d-flex align-items-center justify-content-center ">
             <img
-              className="w-100 rounded-circle border mt-4 my-sm-2"
+              className=" rounded-circle border mt-4 my-sm-2"
               src={user.avatar_url}
+              width="auto"
+              style={{maxHeight: "130px"}}
               alt="Profile pick David Berg"
             />
           </div>
