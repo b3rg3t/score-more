@@ -3,32 +3,40 @@ import CreatePlayer from "./CreatePlayers";
 
 import { v4 as uuidv4 } from "uuid";
 import { GlobalContext } from "../../store/contexts/mainContext";
-import PlayerList from "./PlayerList";
+import { SET_STORAGE } from "../utils/localStorage";
+
+import { useHistory } from "react-router-dom";
 
 const GameForm = () => {
   const { state, dispatch } = useContext(GlobalContext);
 
-  console.log(state);
+  const history = useHistory();
+
   const onSubmit = () => {
     const id = uuidv4();
     const newGame = {
       ...state.game,
+      players: state.users.map((user) => {
+        return {
+          pId: user.value,
+        };
+      }),
       round: [
         {
           id,
           round: 0,
-          playerScore: state.game.players.map((player) => {
+          playerScore: state.users.map((user) => {
             return {
-              pId: "",
+              pId: user.value,
               score: 0,
-              name: "berit",
             };
           }),
         },
       ],
     };
-
-    console.log(newGame);
+    SET_STORAGE(newGame, state.game.id);
+    dispatch({ type: "SET_INITIALSTATE" });
+    history.push(`activegame/${state.game.id}`);
   };
   return (
     <form

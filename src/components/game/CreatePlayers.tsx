@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 
 import Select from "react-select/creatable";
 import { components } from "react-select";
@@ -22,20 +22,25 @@ const CreatePlayer = () => {
   const setPlayers = (value: any) => {
     console.log(value);
     if (value) {
-      dispatch({ type: "ADD_PLAYERS", payload: { value } });
+      if (value.length > 0) {
+        dispatch({ type: "SET_PLAYERS", payload: { value } });
+      } else {
+        dispatch({ type: "SET_PLAYERS" });
+      }
     } else {
-      dispatch({ type: "ADD_PLAYERS", payload: { value: [] } });
+      dispatch({ type: "CLEAR_PLAYERS" });
     }
   };
 
   const createOption = (label: string) => ({
     label,
     value: uuidv4(),
+    games: [],
   });
 
   const handleCreate = (inputValue: string) => {
     const newOption = createOption(inputValue);
-    console.log();
+    dispatch({ type: "ADD_PLAYER", payload: { value: newOption } });
     setOptions([...options, newOption]);
   };
 
