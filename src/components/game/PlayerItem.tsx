@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
-const PlayerItem = () => {
+const PlayerItem = ({ player }: any) => {
   const [counter, setCounter] = useState(0);
 
   return (
     <li className="box-shadow rounded m-1 p-3 d-flex justify-content-between">
-      <div className="d-flex align-items-center">Name</div>
+      <div className="d-flex align-items-center">{player.label}</div>
       <div className="d-flex">
         <button
           className="btn btn-dark btn-sm d-flex align-items-center justify-content-center rounded-circle"

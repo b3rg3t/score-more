@@ -16,11 +16,7 @@ const GameForm = () => {
     const id = uuidv4();
     const newGame = {
       ...state.game,
-      players: state.users.map((user) => {
-        return {
-          pId: user.value,
-        };
-      }),
+      players: state.users,
       round: [
         {
           id,

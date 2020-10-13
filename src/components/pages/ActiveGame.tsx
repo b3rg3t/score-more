@@ -1,22 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight, FaCog } from "react-icons/fa";
 import Footer from "../Footer";
 
 import PlayerList from "../game/PlayerList";
+import { GET_STORAGE } from "../utils/localStorage";
 
 const ActiveGame = ({ match }: any) => {
+  const [game, setGame] = useState({} as any);
   const {
     params: { id },
   } = match;
 
-  console.log(id);
+  useEffect(() => {
+    const getGame = GET_STORAGE(id);
+    setGame(getGame);
+  }, []);
+
   return (
     <section className="player-list overflow-auto">
       <section className="player-list-section p-2 ">
-        <h1 className="text-center">
-          Dynamic route <code>{id}</code>
-        </h1>
-        <PlayerList />
+        <h3 className="text-center">
+          <code>{game.title}</code>
+        </h3>
+        <PlayerList game={game} />
       </section>
       <Footer styling={"bg-dark p-2 player-list-footer top-shadow"}>
         <nav className="text-white">
