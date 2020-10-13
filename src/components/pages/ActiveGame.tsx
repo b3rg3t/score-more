@@ -11,8 +11,8 @@ const ActiveGame = ({ match }: any) => {
 
   console.log(id);
   return (
-    <section className="player-list">
-      <section className="player-list-section p-2 overflow-auto">
+    <section className="player-list overflow-auto">
+      <section className="player-list-section p-2 ">
         <h1 className="text-center">
           Dynamic route <code>{id}</code>
         </h1>

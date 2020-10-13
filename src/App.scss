@@ -11,17 +11,19 @@
 .player-list {
   display: flex;
   flex-direction: column;
-  max-height: 100%;
   justify-content: space-between;
   .player-list-section {
-    flex: 7;
+    flex: 1;
+    margin-bottom: 45px;
   }
   .player-list-footer {
-    flex: 1;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
   }
 }
 
-.selectPlayer__multi-value {
+.addPlayer__multi-value {
   margin: 0;
   &:nth-child(n + 2) {
     display: none;
@@ -32,8 +34,9 @@
   padding: 0 0 0 2px !important;
 }
 .addPlayer__option--is-selected {
-  background-color: white !important;
-  color: black !important;
+  background-color: black !important;
+  color: white !important;
+  border: 1px solid white;
 }
 // .addPlayer__option--is-focused {
 //   background-color: gray !important;
@@ -58,7 +61,7 @@ $color: rgb(255, 187, 187);
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 /* Track */

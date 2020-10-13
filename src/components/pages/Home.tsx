@@ -1,9 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { FaInfo } from "react-icons/fa";
-import { GlobalContext } from "../../store/contexts/mainContext";
 import DisplayActiveGames from "../game/GameList";
 import GithubProfile from "../GithubProfile";
-// import Loader from "../Loader"
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);

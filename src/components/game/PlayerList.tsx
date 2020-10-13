@@ -9,6 +9,9 @@ const PlayerList = () => {
         <PlayerItem />
         <PlayerItem /> 
         <PlayerItem />
+        <PlayerItem />
+        <PlayerItem /> 
+        <PlayerItem />
         <PlayerItem /> 
       </ul>
   );
