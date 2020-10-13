@@ -14,13 +14,14 @@ const ActiveGame = ({ match }: any) => {
   useEffect(() => {
     const getGame = GET_STORAGE(id);
     setGame(getGame);
+    // eslint-disable-next-line
   }, []);
 
   return (
     <section className="player-list overflow-auto">
       <section className="player-list-section p-2 ">
         <h3 className="text-center">
-          <code>{game.title}</code>
+          <code>{game?.title}</code>
         </h3>
         <PlayerList game={game} />
       </section>
@@ -28,13 +29,13 @@ const ActiveGame = ({ match }: any) => {
         <nav className="text-white">
           <ul className="list-unstyled d-flex m-0 justify-content-between">
             <li>
-              <FaChevronLeft size="1.5rem" />
+              <FaChevronLeft size="1.2rem" />
             </li>
             <li>
-              <FaCog size="1.5rem" />
+              <FaCog size="1.2rem" />
             </li>
             <li>
-              <FaChevronRight size="1.5rem" />
+              <FaChevronRight size="1.2rem" />
             </li>
           </ul>
         </nav>

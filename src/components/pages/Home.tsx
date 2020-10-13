@@ -8,8 +8,8 @@ const Home = () => {
 
   return (
     <section className="p-2">
-      <header className="d-flex justify-content-between align-items-center w-100 ">
-        <h1 className="text-center w-100">Home</h1>
+      <header className="d-flex justify-content-between align-items-center w-100 mb-2">
+        <h3 className="text-center w-100 mb-0">Home</h3>
         <button
           className="box-shadow d-flex align-items-center btn btn-info rounded-circle"
           onClick={() => setShowProfile(showProfile ? false : true)}
