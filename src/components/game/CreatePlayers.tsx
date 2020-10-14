@@ -25,7 +25,7 @@ const CreatePlayer = () => {
       if (value.length > 0) {
         dispatch({ type: "SET_PLAYERS", payload: { value } });
       } else {
-        dispatch({ type: "SET_PLAYERS" });
+        dispatch({ type: "CLEAR_PLAYERS" });
       }
     } else {
       dispatch({ type: "CLEAR_PLAYERS" });

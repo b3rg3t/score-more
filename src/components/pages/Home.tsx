@@ -1,10 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import { FaInfo } from "react-icons/fa";
-import DisplayActiveGames from "../game/GameList";
+import GameCard from "../game/GameCard";
 import GithubProfile from "../GithubProfile";
+import { GET_STORAGE } from "../utils/localStorage";
 
 const Home = () => {
   const [showProfile, setShowProfile] = useState(false);
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    const storageGames = GET_STORAGE("games");
+    if (storageGames) {
+      setGames(storageGames.gameIds);
+    }
+  }, []);
+
+  const DisplayGamesFromStorage = (): React.ReactElement => {
+    const fetchedGames = games.map((game) => {
+      const allGames = GET_STORAGE(game);
+      if (allGames) {
+        return allGames;
+      }
+      return null;
+    });
+    if (fetchedGames.length) {
+      return (
+        <ul className="list-unstyled">
+          {fetchedGames.map((game) => (
+            <GameCard key={game.id} game={game} />
+          ))}
+        </ul>
+      );
+    } else {
+      return <></>;
+    }
+  };
 
   return (
     <section className="p-2">
@@ -19,7 +50,7 @@ const Home = () => {
         </button>
       </header>
       {showProfile ? <GithubProfile /> : null}
-      <DisplayActiveGames />
+      {games && <DisplayGamesFromStorage />}
     </section>
   );
 };

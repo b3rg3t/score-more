@@ -3,7 +3,7 @@ import CreatePlayer from "./CreatePlayers";
 
 import { v4 as uuidv4 } from "uuid";
 import { GlobalContext } from "../../store/contexts/mainContext";
-import { SET_STORAGE } from "../utils/localStorage";
+import { GET_STORAGE, SET_STORAGE } from "../utils/localStorage";
 
 import { useHistory } from "react-router-dom";
 
@@ -12,8 +12,19 @@ const GameForm = () => {
 
   const history = useHistory();
 
+  const addToGameStorage = () => {
+    const games = GET_STORAGE("games");
+    console.log(games);
+    if (games) {
+      SET_STORAGE({ gameIds: [...games.gameIds, state.game.id] }, "games");
+    } else {
+      SET_STORAGE({ gameIds: [state.game.id] }, "games");
+    }
+  };
+
   const onSubmit = () => {
     const id = uuidv4();
+    addToGameStorage();
     const newGame = {
       ...state.game,
       players: state.users,
@@ -34,6 +45,7 @@ const GameForm = () => {
     dispatch({ type: "SET_INITIALSTATE" });
     history.push(`activegame/${state.game.id}`);
   };
+
   return (
     <form
       onSubmit={(e) => {

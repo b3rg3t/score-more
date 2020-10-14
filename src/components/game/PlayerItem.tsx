@@ -5,7 +5,7 @@ const PlayerItem = ({ player }: any) => {
   const [counter, setCounter] = useState(0);
 
   return (
-    <li className="box-shadow rounded m-1 p-3 d-flex justify-content-between">
+    <li className="box-shadow rounded m-2 p-3 d-flex justify-content-between">
       <div className="d-flex align-items-center">{player.label}</div>
       <div className="d-flex">
         <button
