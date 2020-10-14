@@ -4,8 +4,8 @@ import { initialState } from "../contexts/mainContext";
 
 const GlobalReducer = (state: any, action: any) => {
   switch (action.type) {
-    case "SET_ORGANIZATIONS":
-      return action.payload.values;
+    case "SET_ACTIVE_ID":
+      return {id: action.payload.value};
 
     case "CLEAR_ORGANIZATIONS":
       return [];

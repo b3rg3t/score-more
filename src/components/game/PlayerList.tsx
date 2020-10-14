@@ -14,7 +14,7 @@ const PlayerList = ({ game }: any) => {
     <ul className="list-unstyled overflow-auto m-0">
       {players?.length ? (
         players.map((player: any) => {
-          return <PlayerItem player={player} />;
+          return <PlayerItem key={player.value} player={player} />;
         })
       ) : (
         <li className="d-flex justify-content-center align-items-center flex-column">
