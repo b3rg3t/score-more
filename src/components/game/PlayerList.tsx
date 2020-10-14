@@ -11,7 +11,7 @@ const PlayerList = ({ game }: any) => {
   }, [game]);
 
   return (
-    <ul className="list-unstyled overflow-auto m-0">
+    <ul className="list-unstyled overflow-auto p-2">
       {players?.length ? (
         players.map((player: any) => {
           return <PlayerItem key={player.value} player={player} />;
