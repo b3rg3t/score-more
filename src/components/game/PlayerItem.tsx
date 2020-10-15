@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
-const PlayerItem = ({ player }: any) => {
+const PlayerItem = ({ player, register }: any) => {
   const [counter, setCounter] = useState(0);
 
   return (
@@ -15,6 +15,13 @@ const PlayerItem = ({ player }: any) => {
         >
           <FaMinus size="1rem" />
         </button>
+        <input
+          type="number"
+          defaultValue={counter}
+          name={player.value}
+          ref={register()}
+          hidden
+        />
         <span className="mx-2 d-flex align-items-center">{counter}</span>
         <button
           className="btn btn-dark btn-sm d-flex align-items-center justify-content-center rounded-circle"

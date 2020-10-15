@@ -23,7 +23,6 @@ const GithubProfile = () => {
       if (response.status === 200) {
         setUser(response.data);
         setIsLoading(false);
-        console.log(response.data);
       } else {
         setIsError(response.status);
         setIsLoading(false);

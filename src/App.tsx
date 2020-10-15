@@ -19,11 +19,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/newgame" component={NewGame} />
-            <Route
-              exact
-              path="/activegame/:id"
-              render={(props) => <ActiveGame {...props} />}
-            />
+            <Route exact path="/activegame/:id" component={ActiveGame} />
           </Switch>
         </Router>
       </main>

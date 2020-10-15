@@ -11,39 +11,44 @@ const GameForm = () => {
   const { state, dispatch } = useContext(GlobalContext);
 
   const history = useHistory();
+  const gId = uuidv4();
 
   const addToGameStorage = () => {
     const games = GET_STORAGE("games");
-    console.log(games);
     if (games) {
-      SET_STORAGE({ gameIds: [...games.gameIds, state.game.id] }, "games");
+      SET_STORAGE({ gameIds: [...games.gameIds, gId] }, "games");
     } else {
-      SET_STORAGE({ gameIds: [state.game.id] }, "games");
+      SET_STORAGE({ gameIds: [gId] }, "games");
     }
   };
 
   const onSubmit = () => {
     const id = uuidv4();
+    
     addToGameStorage();
     const newGame = {
       ...state.game,
-      players: state.users,
+      players: state.game.players,
+      id: gId,
+      isActive: true,
       round: [
         {
           id,
           round: 0,
-          playerScore: state.users.map((user) => {
+          playerScore: state.game.players.map((player) => {
             return {
-              pId: user.value,
+              pId: player.value,
               score: 0,
             };
           }),
         },
       ],
     };
-    SET_STORAGE(newGame, state.game.id);
-    dispatch({ type: "SET_INITIALSTATE" });
-    history.push(`activegame/${state.game.id}`);
+    SET_STORAGE(newGame, gId);
+    dispatch({ type: "SET_GAME_INITIALSTATE" });
+    dispatch({ type: "CLEAR_PLAYERS" });
+    dispatch({ type: "SET_ACTIVE_ID", payload: { value: gId } })
+    history.push(`activegame/${gId}`);
   };
 
   return (

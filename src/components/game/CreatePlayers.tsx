@@ -14,13 +14,12 @@ const CreatePlayer = () => {
     <components.MultiValueContainer {...props}>
       <span className="d-flex align-items-center px-1">
         <ImUsers className="mr-1" />
-        {state.users.length}
+        {state.game.players.length}
       </span>
     </components.MultiValueContainer>
   );
 
   const setPlayers = (value: any) => {
-    console.log(value);
     if (value) {
       if (value.length > 0) {
         dispatch({ type: "SET_PLAYERS", payload: { value } });
@@ -43,7 +42,6 @@ const CreatePlayer = () => {
     dispatch({ type: "ADD_PLAYER", payload: { value: newOption } });
     setOptions([...options, newOption]);
   };
-
   return (
     <Select
       name="players"
@@ -52,7 +50,7 @@ const CreatePlayer = () => {
       classNamePrefix="addPlayer"
       closeMenuOnSelect={true}
       onChange={setPlayers}
-      value={state.users}
+      value={state.game.players}
       noOptionsMessage={() => "Writa a name for the player"}
       isMulti={true}
       options={options}

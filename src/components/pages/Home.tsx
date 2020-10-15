@@ -38,7 +38,7 @@ const Home = () => {
   };
 
   return (
-    <section className="p-2">
+    <section className="p-2 overflow-auto">
       <header className="d-flex justify-content-between align-items-center w-100 mb-2">
         <h3 className="text-center w-100 mb-0">Home</h3>
         <button

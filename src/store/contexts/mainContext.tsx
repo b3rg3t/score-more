@@ -1,7 +1,5 @@
 import React, { createContext, useReducer } from "react";
 
-import { v4 as uuidv4 } from "uuid";
-
 import { GlobalReducer, GameReducer, PlayerReducer } from "../reducers/reducer";
 
 type Users = {
@@ -13,7 +11,7 @@ type Users = {
 type InitialStateType = {
   users: Users[];
   activeGame: { id: string };
-  game: { id: string; title: string; players: string[] };
+  game: { title: string; players: Users[] };
 };
 
 export const initialState = {
@@ -21,7 +19,6 @@ export const initialState = {
   activeGame: { id: "" },
   game: {
     title: "",
-    id: uuidv4(),
     players: [],
     round: [],
   },
