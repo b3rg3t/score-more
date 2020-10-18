@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { GlobalContext } from "../../store/contexts/mainContext";
+import { GlobalContext } from "../../../store/contexts/mainContext";
 
 const GameCard = ({ game }: any) => {
   const { dispatch } = useContext(GlobalContext);
@@ -19,7 +19,7 @@ const GameCard = ({ game }: any) => {
               dispatch({ type: "SET_ACTIVE_ID", payload: { value: game.id } })
             }
           >
-            <FaChevronRight></FaChevronRight>
+            <FaChevronRight />
           </button>
         </Link>
       </div>

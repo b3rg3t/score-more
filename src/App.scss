@@ -8,6 +8,14 @@
   overflow: hidden;
 }
 
+.home-header {
+  position: relative;
+  button {
+    position: absolute;
+    right: 0;
+  }
+}
+
 .player-list {
   display: flex;
   flex-direction: column;
@@ -15,6 +23,18 @@
   .player-list-section {
     flex: 1;
     margin-bottom: 45px;
+    .player-list-section-header {
+      position: relative;
+      top: 0;
+      .player-list-section-header__left {
+        position: absolute;
+        left: 0;
+      }
+      button {
+        position: absolute;
+        right: 0;
+      }
+    }
   }
   .player-list-footer {
     position: fixed;

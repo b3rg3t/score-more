@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import CreatePlayer from "./CreatePlayers";
 
 import { v4 as uuidv4 } from "uuid";
-import { GlobalContext } from "../../store/contexts/mainContext";
-import { GET_STORAGE, SET_STORAGE } from "../utils/localStorage";
+import { GlobalContext } from "../../../store/contexts/mainContext";
+import { GET_STORAGE, SET_STORAGE } from "../../utils/localStorage";
 
 import { useHistory } from "react-router-dom";
 
@@ -74,8 +74,8 @@ const GameForm = () => {
         <CreatePlayer />
       </div>
 
-      <div className="d-flex justify-content-center mb-2">
-        <button className="btn btn-dark btn-sm">Start game</button>
+      <div className="d-flex w-100 mb-2">
+        <button className="btn btn-dark btn-sm w-100">Start game</button>
       </div>
     </form>
   );
