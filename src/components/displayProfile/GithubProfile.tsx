@@ -39,7 +39,7 @@ const GithubProfile = () => {
   }, []);
 
   if (isLoading) {
-    return <Loader />;
+    return <div className="d-flex justify-content-center w-100"><Loader /></div>;
   } else if (isError) {
     return <ErrorMessage errorCode={isError} message="Couldn't load user" />;
   } else {

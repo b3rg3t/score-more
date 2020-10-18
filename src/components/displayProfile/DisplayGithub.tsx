@@ -6,9 +6,9 @@ import GithubProfile from './GithubProfile';
 const DisplayGithub = () => {
     const [showProfile, setShowProfile] = useState(false);
     return (
-        <div className="d-flex justify-content-end">
+        <div className="d-flex justify-content-end flex-column align-items-end">
             <button
-                className="box-shadow d-flex align-items-center btn btn-info rounded-circle"
+                className="box-shadow d-flex align-items-center btn btn-info rounded-circle mb-2"
                 onClick={() => setShowProfile(showProfile ? false : true)}
                 style={{ width: "30px", height: "30px" }}
             >
