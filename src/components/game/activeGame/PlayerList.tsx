@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import PlayerItem from "./PlayerItem";
 import { useForm } from "react-hook-form";
+import Loader from "../../Loader";
 
 const PlayerList = ({ game }: any) => {
   const { register, handleSubmit, watch } = useForm();
   const [players, setPlayers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     if (game?.players) {
       setPlayers(game.players);
-    }
+      setIsLoading(false)
+    } 
   }, [game]);
 
   const onSubmit = (data: any) => {
@@ -19,6 +22,11 @@ const PlayerList = ({ game }: any) => {
   const watchPlayerScore = watch();
 
   console.log(watchPlayerScore);
+  if(isLoading){
+    return (
+      <Loader />
+    )
+  }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <ul className="list-unstyled overflow-auto p-2">

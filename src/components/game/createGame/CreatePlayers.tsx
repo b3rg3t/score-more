@@ -4,7 +4,7 @@ import Select from "react-select/creatable";
 import { components } from "react-select";
 import { ImUsers } from "react-icons/im";
 import { v4 as uuidv4 } from "uuid";
-import { GlobalContext } from "../../store/contexts/mainContext";
+import { GlobalContext } from "../../../store/contexts/mainContext";
 
 const CreatePlayer = () => {
   const { state, dispatch } = useContext(GlobalContext);

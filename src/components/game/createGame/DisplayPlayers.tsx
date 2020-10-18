@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { FaTimes, FaUser } from "react-icons/fa";
-import { GlobalContext } from "../../store/contexts/mainContext";
+import { GlobalContext } from "../../../store/contexts/mainContext";
 
 const DisplayPlayers = () => {
   const { state, dispatch } = useContext(GlobalContext);

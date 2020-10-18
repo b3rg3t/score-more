@@ -7,11 +7,13 @@ import {
 } from "react-icons/fa";
 import Footer from "../Footer";
 
-import PlayerList from "../game/PlayerList";
+import PlayerList from "../game/activeGame/PlayerList";
+import Loader from "../Loader";
 import { GET_STORAGE } from "../utils/localStorage";
 
 const ActiveGame = ({ match }: any) => {
   const [game, setGame] = useState({} as any);
+  const [isLoading, setIsLoading] = useState(true)
   const {
     params: { id },
   } = match;
@@ -19,29 +21,38 @@ const ActiveGame = ({ match }: any) => {
   useEffect(() => {
     const getGame = GET_STORAGE(id);
     setGame(getGame);
+    setIsLoading(false)
     // eslint-disable-next-line
   }, []);
+
+  if (isLoading) {
+    return (
+      <Loader />
+    )
+  }
 
   return (
     <section className="player-list overflow-auto">
       <section className="player-list-section ">
         <header className="d-flex justify-content-between align-items-center px-2 mt-1">
+          <h5 className="text-center mb-0 w-100">
+            <code>{game?.title}</code>
+          </h5>
+        </header>
+        <div className="d-flex justify-content-between align-items-center px-2 mt-1">
           <span
-            className="box-shadow bg-dark text-white border-dark rounded d-flex align-items-center justify-content-center px-3"
-            style={{ height: "24px"}}
+            className="box-shadow bg-dark text-white border-dark rounded d-flex align-items-center justify-content-center px-3 mr-1"
+            style={{ height: "24px" }}
           >
             <small className="font-weight-bold">Round: {game?.round?.length}</small>
           </span>
-          <h5 className="text-center mb-0">
-            <code>{game?.title}</code>
-          </h5>
           <button
             title="Finish game"
             className="box-shadow btn btn-outline-dark btn-sm d-flex justify-content-center align-items-center"
           >
             <FaFlagCheckered />
           </button>
-        </header>
+        </div>
 
         <PlayerList game={game} />
       </section>
@@ -55,8 +66,8 @@ const ActiveGame = ({ match }: any) => {
                 </button>
               </li>
             ) : (
-              <li style={{width: "29.2px"}}></li>
-            )}
+                <li style={{ width: "29.2px" }}></li>
+              )}
 
             <li>
               <button className="btn btn-dark p-1 m-0 d-flex justify-content-center align-items-center">

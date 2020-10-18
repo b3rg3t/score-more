@@ -1,6 +1,6 @@
 import React from "react";
-import DisplayPlayers from "../game/DisplayPlayers";
-import GameForm from "../game/GameForm";
+import DisplayPlayers from "../game/createGame/DisplayPlayers";
+import GameForm from "../game/createGame/GameForm";
 
 const NewGame = () => {
   return (
