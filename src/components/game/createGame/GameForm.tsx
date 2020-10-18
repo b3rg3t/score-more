@@ -28,7 +28,13 @@ const GameForm = () => {
     addToGameStorage();
     const newGame = {
       ...state.game,
-      players: state.game.players,
+      players: state.game.players.map((player) => {
+        return {
+          pId: player.value,
+          label: player.label,
+          games: [{ id: gId }],
+        };
+      }),
       id: gId,
       isActive: true,
       activeRound: {

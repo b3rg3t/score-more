@@ -12,15 +12,15 @@ const PlayerList = ({ game }: any) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useMemo(() => {
-    if (game.players) {
-      setPlayers(game.players);
+    if (game.activeRound.playerScore) {
+      setPlayers(game.activeRound.playerScore);
       setIsLoading(false);
+      console.log(game.activeRound.playerScore);
     }
-  }, [game]);
-
+  }, [game.activeRound.playerScore]);
 
   const onSubmit = (data: any) => {
-
+    console.log(data)
     const newActiveRound = {
       id: uuidv4(),
       round: game.activeRound.round + 1,
@@ -38,7 +38,7 @@ const PlayerList = ({ game }: any) => {
       activeRound: newActiveRound,
     };
 
-    SET_STORAGE(newRound, game.id )
+    SET_STORAGE(newRound, game.id);
   };
 
   if (isLoading) {
@@ -51,8 +51,11 @@ const PlayerList = ({ game }: any) => {
             players.map((player: any) => {
               return (
                 <PlayerItem
-                  key={player.value}
-                  player={player}
+                  key={player.pId}
+                  player={game.players.find(
+                    ({ pId }: any) => pId === player.pId
+                  )}
+                  score={player.score}
                   register={register}
                 />
               );
