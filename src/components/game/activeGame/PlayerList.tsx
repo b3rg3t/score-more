@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import PlayerItem from "./PlayerItem";
 import { useForm } from "react-hook-form";
 import Loader from "../../Loader";
@@ -8,25 +8,28 @@ const PlayerList = ({ game }: any) => {
   const [players, setPlayers] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    if (game?.players) {
+
+  useMemo(() => {
+    if (game.players) {
       setPlayers(game.players);
       setIsLoading(false)
-    } 
-  }, [game]);
+    }
+  }, [game])
 
   const onSubmit = (data: any) => {
     console.log(data);
   };
 
-  const watchPlayerScore = watch();
+  const watchScore = watch()
 
-  console.log(watchPlayerScore);
-  if(isLoading){
+
+  if (isLoading) {
     return (
       <Loader />
     )
   }
+
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <ul className="list-unstyled overflow-auto p-2">
@@ -41,10 +44,10 @@ const PlayerList = ({ game }: any) => {
             );
           })
         ) : (
-          <li className="d-flex justify-content-center align-items-center flex-column">
-            <code>Couldn't find game</code>
-          </li>
-        )}
+            <li className="d-flex justify-content-center align-items-center flex-column">
+              <code>Couldn't find game</code>
+            </li>
+          )}
       </ul>
       <div className="d-flex justify-content-center">
         <button className="btn btn-dark" type="submit">

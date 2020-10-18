@@ -19,6 +19,7 @@ const PlayerItem = ({ player, register }: any) => {
       </div>
       <div className="d-flex justify-content-center align-items-center">
         <button
+          type="button"
           className="btn btn-dark btn-sm d-flex align-items-center justify-content-center rounded-circle"
           onClick={() => setCounter((prevState) => prevState - 1)}
           style={{ width: "26px", height: "26px" }}
@@ -27,13 +28,15 @@ const PlayerItem = ({ player, register }: any) => {
         </button>
         <input
           type="number"
-          defaultValue={counter}
+          value={counter}
+          onChange={() => counter}
           name={player.value}
           ref={register()}
           hidden
         />
         <span className="mx-2 d-flex align-items-center">{counter}</span>
         <button
+          type="button"
           className="btn btn-dark btn-sm d-flex align-items-center justify-content-center rounded-circle"
           onClick={() => setCounter((prevState) => prevState + 1)}
           style={{ width: "26px", height: "26px" }}

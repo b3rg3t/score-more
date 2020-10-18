@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "../src/components/pages/Home";
 import NewGame from "../src/components/pages/NewGame";
-import ActiveGame from "../src/components/pages/ActiveGame";
+import Game from "./components/pages/Game";
 
 import "./App.scss";
 
@@ -19,7 +19,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/newgame" component={NewGame} />
-            <Route exact path="/activegame/:id" component={ActiveGame} />
+            <Route exact path="/activegame/:id" component={Game} />
           </Switch>
         </Router>
       </main>

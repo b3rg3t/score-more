@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Loader from "./Loader";
-import ErrorMessage from "./ErrorMessage";
+import Loader from "../Loader";
+import ErrorMessage from "../ErrorMessage";
 import {
   FaFacebook,
   FaGithub,
