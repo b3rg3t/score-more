@@ -24,13 +24,23 @@ const GameForm = () => {
 
   const onSubmit = () => {
     const id = uuidv4();
-    
+
     addToGameStorage();
     const newGame = {
       ...state.game,
       players: state.game.players,
       id: gId,
       isActive: true,
+      activeRound: {
+        id,
+        round: 0,
+        playerScore: state.game.players.map((player) => {
+          return {
+            pId: player.value,
+            score: 0,
+          };
+        }),
+      },
       round: [
         {
           id,
@@ -47,7 +57,7 @@ const GameForm = () => {
     SET_STORAGE(newGame, gId);
     dispatch({ type: "SET_GAME_INITIALSTATE" });
     dispatch({ type: "CLEAR_PLAYERS" });
-    dispatch({ type: "SET_ACTIVE_ID", payload: { value: gId } })
+    dispatch({ type: "SET_ACTIVE_ID", payload: { value: gId } });
     history.push(`activegame/${gId}`);
   };
 
