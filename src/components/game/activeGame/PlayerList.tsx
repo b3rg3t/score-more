@@ -20,6 +20,8 @@ const PlayerList = ({ game }: any) => {
     console.log(data);
   };
 
+
+
   if (isLoading) {
     return (
       <Loader />
