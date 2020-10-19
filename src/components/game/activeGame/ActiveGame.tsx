@@ -16,8 +16,14 @@ import Modal from "../../Modal";
 const ActiveGame = ({ id }: any) => {
   const [game, setGame] = useState({} as any);
   const [isLoading, setIsLoading] = useState(true);
+  const [update, setUpdate] = useState(false);
+
+  const updateRoundCallback = () => {
+    setUpdate(update ? false : true);
+  };
 
   useEffect(() => {
+    setIsLoading(true)
     const getGame = GET_STORAGE(id);
     try {
       setGame(getGame);
@@ -26,9 +32,10 @@ const ActiveGame = ({ id }: any) => {
       console.log(err);
     }
     // eslint-disable-next-line
-  }, []);
+  }, [update]);
 
   const modalRef = useRef();
+  
   const openModal = () => {
     if (modalRef) {
       //@ts-ignore
@@ -67,7 +74,7 @@ const ActiveGame = ({ id }: any) => {
               style={{ height: "24px" }}
             >
               <small className="font-weight-bold">
-                Round: {game?.activeRound?.round + 1}
+                Round: {game?.activeRound?.round}
               </small>
             </span>
             <button
@@ -77,7 +84,7 @@ const ActiveGame = ({ id }: any) => {
               <FaFlagCheckered />
             </button>
           </div>
-          <PlayerList game={game} />
+          <PlayerList game={game} updateRoundCallback={updateRoundCallback} />
           <Footer styling={"bg-dark p-1 player-list-footer top-shadow"}>
             <nav className="text-white">
               <ul className="list-unstyled d-flex m-0 justify-content-between">

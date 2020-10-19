@@ -18,7 +18,10 @@ const GameCard = ({ game }: any) => {
 
       <div className="d-flex w-100 flex-column ">
         <h5 className="card-title mb-1">{game.title}</h5>
-        <p className="m-0 text-muted">Players: {game.players.length}</p>
+        <div className="d-flex justify-content-between pr-2">
+          <p className="m-0 text-muted">Players: {game.players.length}</p>
+          <p className="m-0 text-muted">Rounds: {game.round.length + 1}</p>
+        </div>
       </div>
       <div className="d-flex justify-content-between align-items-center">
         <Link to={`/activegame/${game.id}`}>

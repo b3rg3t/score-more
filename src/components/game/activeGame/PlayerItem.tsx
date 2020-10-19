@@ -1,9 +1,13 @@
-// @ts-nocheck
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
 const PlayerItem = ({ player, register, score }: any) => {
-  const [counter, setCounter] = useState(score);
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    setCounter(score);
+  }, [score]);
+
   return (
     <li className="box-shadow rounded mb-2 p-2 d-flex justify-content-between">
       <div className="d-flex align-items-center">
@@ -29,11 +33,11 @@ const PlayerItem = ({ player, register, score }: any) => {
         </button>
         <input
           type="number"
+          name={player.pId}
           value={counter}
           onChange={() => counter}
-          name={player.pId}
-          ref={register()}
           hidden
+          ref={register()}
         />
         <span className="mx-2 d-flex align-items-center">{counter}</span>
         <button

@@ -31,4 +31,4 @@ const Modal = forwardRef((props: any, ref) => {
   return null;
 });
 
-export default Modal;
+export default Modal;   

@@ -39,7 +39,7 @@ const GameForm = () => {
       isActive: true,
       activeRound: {
         id,
-        round: 0,
+        round: 1,
         playerScore: state.game.players.map((player) => {
           return {
             pId: player.value,
@@ -47,18 +47,7 @@ const GameForm = () => {
           };
         }),
       },
-      round: [
-        {
-          id,
-          round: 0,
-          playerScore: state.game.players.map((player) => {
-            return {
-              pId: player.value,
-              score: 0,
-            };
-          }),
-        },
-      ],
+      round: [],
     };
     SET_STORAGE(newGame, gId);
     dispatch({ type: "SET_GAME_INITIALSTATE" });

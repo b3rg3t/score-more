@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 
 import PlayerItem from "./PlayerItem";
 import { useForm } from "react-hook-form";
@@ -6,22 +6,22 @@ import Loader from "../../Loader";
 import { v4 as uuidv4 } from "uuid";
 import { SET_STORAGE } from "../../utils/localStorage";
 
-const PlayerList = ({ game }: any) => {
-  const { register, handleSubmit } = useForm();
+const PlayerList = ({ game, updateRoundCallback }: any) => {
+  const { register, handleSubmit, reset, watch } = useForm();
   const [players, setPlayers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useMemo(() => {
+  console.log(game.activeRound)
+
+  useEffect(() => {
     if (game.activeRound.playerScore) {
       setPlayers(game.activeRound.playerScore);
       setIsLoading(false);
-      console.log(game.activeRound.playerScore);
     }
   }, [game.activeRound.playerScore]);
 
   const onSubmit = (data: any) => {
-    console.log(data)
-    const newActiveRound = {
+    const setScoreToRound = {
       id: uuidv4(),
       round: game.activeRound.round + 1,
       playerScore: Object.keys(data).map((item) => {
@@ -34,12 +34,26 @@ const PlayerList = ({ game }: any) => {
 
     const newRound = {
       ...game,
-      round: [...game.round, newActiveRound],
-      activeRound: newActiveRound,
+      round: [...game.round, setScoreToRound],
+      activeRound: {
+        id: uuidv4(),
+        round: game.activeRound.round + 1,
+        playerScore: Object.keys(data).map((item) => {
+          return {
+            pId: item,
+            score: 0,
+          };
+        }),
+      },
     };
 
     SET_STORAGE(newRound, game.id);
+    updateRoundCallback();
   };
+
+  const watcher = watch()
+
+  console.log(watcher)
 
   if (isLoading) {
     return <Loader />;
@@ -57,6 +71,7 @@ const PlayerList = ({ game }: any) => {
                   )}
                   score={player.score}
                   register={register}
+                  reset={reset}
                 />
               );
             })
