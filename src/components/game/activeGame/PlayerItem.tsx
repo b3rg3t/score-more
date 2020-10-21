@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
-const PlayerItem = ({ player, register, score }: any) => {
+const PlayerItem = ({ player, register, update }: any) => {
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    setCounter(score);
-  }, [score]);
+    setCounter(0);
+  }, [update]);
 
   return (
     <li className="box-shadow rounded mb-2 p-2 d-flex justify-content-between">

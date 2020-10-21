@@ -18,14 +18,11 @@ const ActiveGame = ({ id }: any) => {
   const [isLoading, setIsLoading] = useState(true);
   const [update, setUpdate] = useState(false);
 
-  const updateRoundCallback = () => {
-    setUpdate(update ? false : true);
-  };
-
   useEffect(() => {
-    setIsLoading(true)
-    const getGame = GET_STORAGE(id);
+    setIsLoading(true);
     try {
+      const getGame = GET_STORAGE(id);
+      console.log(game)
       setGame(getGame);
       setIsLoading(false);
     } catch (err) {
@@ -35,7 +32,7 @@ const ActiveGame = ({ id }: any) => {
   }, [update]);
 
   const modalRef = useRef();
-  
+
   const openModal = () => {
     if (modalRef) {
       //@ts-ignore
@@ -47,6 +44,10 @@ const ActiveGame = ({ id }: any) => {
       //@ts-ignore
       modalRef.current.close();
     }
+  };
+
+  const updateListCallback = () => {
+    setUpdate((prevState) => (prevState ? false : true));
   };
 
   if (isLoading) {
@@ -84,7 +85,11 @@ const ActiveGame = ({ id }: any) => {
               <FaFlagCheckered />
             </button>
           </div>
-          <PlayerList game={game} updateRoundCallback={updateRoundCallback} />
+          <PlayerList
+            id={id}
+            updateListCallback={updateListCallback}
+            activeGame={game}
+          />
           <Footer styling={"bg-dark p-1 player-list-footer top-shadow"}>
             <nav className="text-white">
               <ul className="list-unstyled d-flex m-0 justify-content-between">

@@ -1,24 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+
+import { useForm } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
 
 import PlayerItem from "./PlayerItem";
-import { useForm } from "react-hook-form";
-import Loader from "../../Loader";
-import { v4 as uuidv4 } from "uuid";
 import { SET_STORAGE } from "../../utils/localStorage";
 
-const PlayerList = ({ game, updateRoundCallback }: any) => {
-  const { register, handleSubmit, reset, watch } = useForm();
-  const [players, setPlayers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+const PlayerList = ({ activeGame, updateListCallback }: any) => {
+  const { register, handleSubmit, reset, watch } = useForm({
+    defaultValues: {},
+  });
+  const [game] = useState(activeGame);
+  const [players] = useState(activeGame.activeRound.playerScore);
+  const [update, setUpdate] = useState(false);
 
-  console.log(game.activeRound)
 
-  useEffect(() => {
-    if (game.activeRound.playerScore) {
-      setPlayers(game.activeRound.playerScore);
-      setIsLoading(false);
-    }
-  }, [game.activeRound.playerScore]);
+  const handleChange = () => {
+    setUpdate((prevState) => (prevState ? false : true));
+  };
 
   const onSubmit = (data: any) => {
     const setScoreToRound = {
@@ -48,47 +47,45 @@ const PlayerList = ({ game, updateRoundCallback }: any) => {
     };
 
     SET_STORAGE(newRound, game.id);
-    updateRoundCallback();
+    updateListCallback();
+    handleChange();
   };
 
-  const watcher = watch()
+  const watcher = watch();
 
-  console.log(watcher)
 
-  if (isLoading) {
-    return <Loader />;
-  } else {
-    return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <ul className="list-unstyled overflow-auto p-2">
-          {players?.length ? (
-            players.map((player: any) => {
-              return (
-                <PlayerItem
-                  key={player.pId}
-                  player={game.players.find(
-                    ({ pId }: any) => pId === player.pId
-                  )}
-                  score={player.score}
-                  register={register}
-                  reset={reset}
-                />
-              );
-            })
-          ) : (
-            <li className="d-flex justify-content-center align-items-center flex-column">
-              <code>Couldn't find game</code>
-            </li>
-          )}
-        </ul>
-        <div className="d-flex justify-content-center">
-          <button className="btn btn-dark" type="submit">
-            Submit
-          </button>
-        </div>
-      </form>
-    );
-  }
+  console.log(watcher);
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <ul className="list-unstyled overflow-auto p-2">
+        {players?.length ? (
+          players.map((player: any) => {
+            return (
+              <PlayerItem
+                key={player.pId}
+                player={game.players.find(({ pId }: any) => pId === player.pId)}
+                score={player.score}
+                register={register}
+                reset={reset}
+                watch={watch}
+                update={update}
+              />
+            );
+          })
+        ) : (
+          <li className="d-flex justify-content-center align-items-center flex-column">
+            <code>Couldn't find game</code>
+          </li>
+        )}
+      </ul>
+      <div className="d-flex justify-content-center">
+        <button className="btn btn-dark" type="submit">
+          Submit
+        </button>
+      </div>
+    </form>
+  );
 };
 
 export default PlayerList;
