@@ -9,6 +9,7 @@ import Game from "./components/pages/Game";
 import "./App.scss";
 
 import { GlobalProvider } from "./store/contexts/mainContext";
+import Swiper from "./components/pages/Swiper";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/newgame" component={NewGame} />
             <Route exact path="/activegame/:id" component={Game} />
+            <Route exact path="/swiper" component={Swiper} />
           </Switch>
         </Router>
       </main>
