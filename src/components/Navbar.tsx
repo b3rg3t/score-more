@@ -10,12 +10,18 @@ const Navbar = () => {
     <nav className="main-shadow w-100 bg-dark">
       <ul className="list-unstyled d-flex justify-content-between align-items-center py-0 px-1 m-0">
         <li className="p-1">
-          <Link to="/" className="text-white btn btn-dark p-1 m-0 d-flex justify-content-center align-items-center">
+          <Link
+            to="/"
+            className="text-white btn btn-dark p-1 m-0 d-flex justify-content-center align-items-center"
+          >
             <FaHome size="1.2rem" />
           </Link>
         </li>
         <li className="p-1">
-          <Link to="/newgame" className="text-white btn btn-dark p-1 m-0 d-flex justify-content-center align-items-center">
+          <Link
+            to="/newgame"
+            className="text-white btn btn-dark p-1 m-0 d-flex justify-content-center align-items-center"
+          >
             <FaPlus size="1rem" />
           </Link>
         </li>
@@ -29,7 +35,14 @@ const Navbar = () => {
             </Link>
           </li>
         ) : (
-          <li style={{width: "34px"}}></li>
+          <li style={{ width: "34px" }}>
+            <Link
+              to={`/swiper`}
+              className="text-white btn btn-dark p-1 m-0 d-flex justify-content-center align-items-center"
+            >
+              <FaGamepad size="1.4rem" />
+            </Link>
+          </li>
         )}
       </ul>
     </nav>

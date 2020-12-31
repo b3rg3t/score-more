@@ -12,7 +12,7 @@ SwiperCore.use([Pagination, Virtual]);
 
 const SwiperPage = () => {
   const [slides, setSlides] = useState(
-    Array.from({ length: 5 }).map((el, index) => `Slide ${index + 1}`)
+    Array.from({ length: 1 }).map((el, index) => `Slide ${index + 1}`)
   );
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,6 +39,7 @@ const SwiperPage = () => {
       virtualIndex={index}
     >
       {slide}
+
       <button className="btn btn-primary btn-sm" onClick={() => addNewSlide()}>
         Add slide
       </button>

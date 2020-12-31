@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
+import ProfilePic from "../../../images/profile2.png";
+
 const PlayerItem = ({ player, register, update }: any) => {
   const [counter, setCounter] = useState(0);
 
@@ -12,13 +14,11 @@ const PlayerItem = ({ player, register, update }: any) => {
     <li className="box-shadow rounded mb-2 p-2 d-flex justify-content-between">
       <div className="d-flex align-items-center">
         <img
-          className="rounded-circle border border-secondary mr-1"
+          className="rounded-circle border border-secondary mr-1 p-1"
           width="42px"
           height="42px"
           alt="img of profile"
-          src={`https://api.adorable.io/avatars/40/${
-            player.pId ? player.pId : player.label
-          }.png`}
+          src={`${ProfilePic}`}
         />
         <span>{player.label}</span>
       </div>
