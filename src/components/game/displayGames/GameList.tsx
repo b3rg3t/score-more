@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 import GameCard from "./GameCard";
 import { GET_STORAGE } from "../../utils/localStorage";
+import { Link } from "react-router-dom";
 
 const GameList = (): React.ReactElement => {
   const [games, setGames] = useState([]);
@@ -28,8 +29,15 @@ const GameList = (): React.ReactElement => {
       </ul>
     );
   } else {
-    return <></>;
+    return (
+      <div className="d-flex flex-column align-items-center justify-content-center">
+        <p>You don't have any active games</p>
+        <Link className="btn btn-dark" to={`/newgame`}>
+          Create new game
+        </Link>
+      </div>
+    );
   }
-}
+};
 
-export default GameList
+export default GameList;

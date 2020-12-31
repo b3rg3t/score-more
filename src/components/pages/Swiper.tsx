@@ -39,7 +39,6 @@ const SwiperPage = () => {
       virtualIndex={index}
     >
       {slide}
-
       <button className="btn btn-primary btn-sm" onClick={() => addNewSlide()}>
         Add slide
       </button>
@@ -52,17 +51,14 @@ const SwiperPage = () => {
 
   if (isLoading) {
     return (
-      <div
-        className="d-flex align-items-center justify-content-center"
-        style={{ height: "calc(100vh - 37.2px)" }}
-      >
+      <div className="d-flex align-items-center justify-content-center h-100">
         <Loader />
       </div>
     );
   }
 
   return (
-    <main className="swiper" style={{ height: "calc(100vh - 37.2px)" }}>
+    <main className="swiper h-100">
       <Swiper
         className="h-100"
         {...swiperParams}

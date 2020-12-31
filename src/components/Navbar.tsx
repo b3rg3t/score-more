@@ -18,12 +18,16 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="p-1">
-          <Link
-            to="/newgame"
-            className="text-white btn btn-dark p-1 m-0 d-flex justify-content-center align-items-center"
-          >
-            <FaPlus size="1rem" />
-          </Link>
+          {state.activeGame.id ? (
+            <Link
+              to="/newgame"
+              className="text-white btn btn-dark p-1 m-0 d-flex justify-content-center align-items-center"
+            >
+              <FaPlus size="1rem" />
+            </Link>
+          ) : (
+            <h3>{state.activeGame.id}</h3>
+          )}
         </li>
         {state.activeGame.id ? (
           <li className="p-1">
