@@ -5,13 +5,12 @@ import ActiveGame from "../game/activeGame/ActiveGame";
 
 const Game = ({ match }: any) => {
   const {
-    params: { id },
+    params: { id, gameId },
   } = match;
 
   return (
     <section className="player-list overflow-auto">
-      {/* <ActiveGayme /> */}
-      {id  && <ActiveGame id={id} />}
+      {id  && <ActiveGame id={id} gameId={gameId} />}
     </section>
   );
 };

@@ -21,6 +21,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/newgame" component={NewGame} />
             <Route exact path="/activegame/:id" component={Game} />
+            <Route exact path="/activegame/:id/:gameId" component={Game} />
             <Route exact path="/swiper" component={Swiper} />
           </Switch>
         </Router>

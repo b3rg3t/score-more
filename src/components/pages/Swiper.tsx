@@ -14,6 +14,7 @@ const SwiperPage = () => {
   const [slides, setSlides] = useState(
     Array.from({ length: 1 }).map((el, index) => `Slide ${index + 1}`)
   );
+  const [swiper, setSwiper] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const addNewSlide = () => {
@@ -31,6 +32,13 @@ const SwiperPage = () => {
   };
 
   let slideElements;
+
+  useEffect(() => {
+    if (swiper) {
+      swiper.slideTo(slides.length);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [swiper]);
 
   slideElements = slides.map((slide, index) => (
     <SwiperSlide
@@ -56,16 +64,15 @@ const SwiperPage = () => {
       </div>
     );
   }
-
   return (
     <main className="swiper h-100">
       <Swiper
         className="h-100"
         {...swiperParams}
         virtual={true}
-        onInit={(swiper) => console.log(swiper)}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
+        onInit={(s) => console.log(s)}
+        onSwiper={(s) => setSwiper(s)}
+        onSlideChange={(s) => setSwiper(s)}
       >
         {slideElements}
       </Swiper>
