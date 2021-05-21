@@ -24,6 +24,7 @@ function GET_STORAGE(key: string) {
 
   // compare the expiry time of the item with the current time
   if (now.getTime() > item.expiry) {
+
     // If the item is expired, delete the item from storage
     // and return null
     localStorage.removeItem(key);

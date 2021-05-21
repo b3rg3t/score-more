@@ -10,13 +10,13 @@ const DisplayPlayers = () => {
   };
 
   return state?.game?.players?.length ? (
-    <ul className="list-unstyled d-flex m-0 flex-wrap overflow-auto">
+    <ul className="list-unstyled d-flex m-0 flex-wrap overflow-auto py-2">
       {state.game.players.map((player, index) => (
         <li className="box-shadow badge d-flex align-items-center justify-content-center pl-2 m-1" key={index}>
           <FaUser className="mr-1"/>
           <p className="m-0">{player.label}</p>
           <button
-            className="btn btn-dark btn-sm ml-2 d-flex align-items-center" 
+            className="btn btn-outline-dark btn-sm ml-2 d-flex align-items-center" 
             onClick={() => removeUser(player.value)}
             style={{width: "24px"}}
           >

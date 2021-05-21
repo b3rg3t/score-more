@@ -51,10 +51,7 @@ const PlayerList = ({ activeGame, updateListCallback }: any) => {
     handleChange();
   };
 
-  const watcher = watch();
-
-
-  console.log(watcher);
+  // const watcher = watch();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -22,8 +22,42 @@ const GameForm = () => {
     }
   };
 
+  const addPlayerToPlayerList = (players: any) => {
+    const activePlayers = GET_STORAGE("players");
+    if (activePlayers?.players) {
+      let exisingPlayers: any = [];
+      let newPlayers: any = [];
+
+      players.players.forEach((playerB: any) => {
+        activePlayers.players.forEach((playerA: any) => {
+          if (playerB.value === playerA.value) {
+            exisingPlayers.push(playerA);
+          }
+        });
+      });
+
+      console.log({exisingPlayers, newPlayers});
+      const populatePlayerList = {
+        players: [...activePlayers.players, ...players.players],
+      };
+      // SET_STORAGE(populatePlayerList, "players");
+    } else {
+      SET_STORAGE(players, "players");
+    }
+  };
+
   const onSubmit = () => {
     const id = uuidv4();
+
+    const players = {
+      players: state.game.players.map((player) => {
+        return {
+          value: player.value,
+          label: player.label,
+          games: [{ id: gId }],
+        };
+      }),
+    };
 
     addToGameStorage();
     const newGame = {
@@ -50,6 +84,7 @@ const GameForm = () => {
       round: [],
     };
     SET_STORAGE(newGame, gId);
+    addPlayerToPlayerList(players);
     dispatch({ type: "SET_GAME_INITIALSTATE" });
     dispatch({ type: "CLEAR_PLAYERS" });
     dispatch({ type: "SET_ACTIVE_ID", payload: { value: gId } });

@@ -22,7 +22,6 @@ const ActiveGame = ({ id }: any) => {
     setIsLoading(true);
     try {
       const getGame = GET_STORAGE(id);
-      console.log(game)
       setGame(getGame);
       setIsLoading(false);
     } catch (err) {

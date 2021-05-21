@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import Select from "react-select/creatable";
 import { components } from "react-select";
 import { ImUsers } from "react-icons/im";
 import { v4 as uuidv4 } from "uuid";
 import { GlobalContext } from "../../../store/contexts/mainContext";
+import { GET_STORAGE } from "../../utils/localStorage";
 
 const CreatePlayer = () => {
   const { state, dispatch } = useContext(GlobalContext);
@@ -18,6 +19,13 @@ const CreatePlayer = () => {
       </span>
     </components.MultiValueContainer>
   );
+
+  useEffect(() => {
+    const getPlayers = GET_STORAGE("players");
+    if (getPlayers?.players) {
+      setOptions(getPlayers.players);
+    }
+  }, []);
 
   const setPlayers = (value: any) => {
     if (value) {
