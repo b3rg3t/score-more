@@ -1,3 +1,30 @@
+// VARIABLES
+$bg-shadow: 0 4px 2px -2px rgba(58, 58, 58, 0.301);
+$bg-shadow: 0 -4px -2px 2px rgba(58, 58, 58, 0.301);
+$bg-shadow-border: 0 0 0 1px hsla(0, 1%, 43%, 0.1), 0 4px 11px hsla(0, 0%, 0%, 0.1);
+$overlay: hsla(0, 0%, 0%, 0.3);
+$color: rgb(255, 187, 187);
+$neon-color: rgb(255, 0, 221);
+
+// GENEREAL
+.main-shadow {
+  box-shadow: $bg-shadow;
+}
+.box-shadow {
+  box-shadow: $bg-shadow-border;
+}
+.top-shadow {
+  box-shadow: $bg-shadow-border;
+}
+
+.neon {
+  color: $neon-color;
+  :hover {
+    text-decoration: none !important;
+    color: $neon-color !important;
+  }
+}
+
 .main-content {
   display: flex;
   flex-direction: column;
@@ -58,28 +85,8 @@
   color: white !important;
   border: 1px solid white;
 }
-// .addPlayer__option--is-focused {
-//   background-color: gray !important;
-//   color: black !important;
-// }
 
-$bg-shadow: 0 4px 2px -2px rgba(58, 58, 58, 0.301);
-$bg-shadow: 0 -4px -2px 2px rgba(58, 58, 58, 0.301);
-$bg-shadow-border: 0 0 0 1px hsla(0, 1%, 43%, 0.1), 0 4px 11px hsla(0, 0%, 0%, 0.1);
-$overlay: hsla(0, 0%, 0%, 0.3);
-
-$color: rgb(255, 187, 187);
-
-.main-shadow {
-  box-shadow: $bg-shadow;
-}
-.box-shadow {
-  box-shadow: $bg-shadow-border;
-}
-.top-shadow {
-  box-shadow: $bg-shadow-border;
-}
-
+/* SCROLLBARS */ 
 /* width */
 ::-webkit-scrollbar {
   width: 8px;
@@ -104,7 +111,7 @@ $color: rgb(255, 187, 187);
   cursor: pointer;
 }
 
-
+/* MODAL */
 .modal-wrapper {
   position: fixed;
   top: 0;

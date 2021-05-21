@@ -17,7 +17,9 @@ const GameCard = ({ game }: any) => {
       </div>
 
       <div className="d-flex w-100 flex-column ">
-        <h5 className="card-title mb-1">{game.title}</h5>
+        <h5 className="card-title mb-1">
+          <code>{game.title}</code>
+        </h5>
         <div className="d-flex justify-content-between pr-2">
           <p className="m-0 text-muted">Players: {game.players.length}</p>
           <p className="m-0 text-muted">Rounds: {game.round.length + 1}</p>

@@ -8,7 +8,6 @@ const DisplayUserList = () => {
 
   useEffect(() => {
     const storagedUsers = GET_STORAGE("players");
-    console.log(storagedUsers);
     if (storagedUsers?.players) {
       setUsers(storagedUsers.players);
     }

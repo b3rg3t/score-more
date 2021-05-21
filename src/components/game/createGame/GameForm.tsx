@@ -25,7 +25,6 @@ const GameForm = () => {
   const addNewPlayerItem = (value: any) => {
     const users = GET_STORAGE("players");
 
-    console.log(value);
     if (users.players) {
       const checkedList = users.players.filter((player: any) => {
         return player.value !== value.value;
@@ -119,7 +118,18 @@ const GameForm = () => {
           };
         }),
       },
-      round: [],
+      round: [
+        {
+          id,
+          round: 1,
+          playerScore: state.game.players.map((player) => {
+            return {
+              pId: player.value,
+              score: 0,
+            };
+          }),
+        },
+      ],
     };
     SET_STORAGE(newGame, gId);
     addPlayerToPlayerList(players);
