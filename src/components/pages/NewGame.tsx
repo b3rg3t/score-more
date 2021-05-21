@@ -5,7 +5,9 @@ import GameForm from "../game/createGame/GameForm";
 const NewGame = () => {
   return (
     <section className="p-2">
-      <h3 className="text-center">Create a new game</h3>
+      <h4 className="text-center">
+        <code>Create a new game</code>
+      </h4>
       <GameForm />
       <DisplayPlayers />
     </section>

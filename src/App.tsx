@@ -10,6 +10,7 @@ import "./App.scss";
 
 import { GlobalProvider } from "./store/contexts/mainContext";
 import Swiper from "./components/pages/Swiper";
+import DisplayUserList from "./components/lists/DisplayUserList";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/newgame" component={NewGame} />
+            <Route exact path="/userlist" component={DisplayUserList} />
             <Route exact path="/activegame/:id" component={Game} />
             <Route exact path="/activegame/:id/:gameId" component={Game} />
             <Route exact path="/swiper" component={Swiper} />

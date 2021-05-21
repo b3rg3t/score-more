@@ -22,25 +22,63 @@ const GameForm = () => {
     }
   };
 
+  const addNewPlayerItem = (value: any) => {
+    const users = GET_STORAGE("players");
+
+    console.log(value);
+    if (users.players) {
+      const checkedList = users.players.filter((player: any) => {
+        return player.value !== value.value;
+      });
+      SET_STORAGE({ players: [...checkedList, value] }, "players");
+    }
+  };
+
+  const updatePlayer = (value: string, games: any) => {
+    const users = GET_STORAGE("players");
+    if (users.players) {
+      const newUserList = users.players.filter((player: any) => {
+        return player.value !== value;
+      });
+      const specificUser = users.players.find((player: any) => {
+        return player.value === value;
+      });
+      if (specificUser) {
+        const updatedUser = {
+          ...specificUser,
+          value: specificUser.value,
+          games,
+        };
+        newUserList.push(updatedUser);
+        SET_STORAGE({ players: newUserList }, "players");
+      }
+    }
+  };
+
   const addPlayerToPlayerList = (players: any) => {
     const activePlayers = GET_STORAGE("players");
     if (activePlayers?.players) {
       let exisingPlayers: any = [];
-      let newPlayers: any = [];
 
-      players.players.forEach((playerB: any) => {
-        activePlayers.players.forEach((playerA: any) => {
+      activePlayers.players.forEach((playerA: any) => {
+        players.players.forEach((playerB: any) => {
           if (playerB.value === playerA.value) {
-            exisingPlayers.push(playerA);
+            exisingPlayers.push({
+              ...playerA,
+              games: [...playerA.games, ...playerB.games],
+            });
+          } else {
+            addNewPlayerItem(playerA);
+            addNewPlayerItem(playerB);
           }
         });
       });
 
-      console.log({exisingPlayers, newPlayers});
-      const populatePlayerList = {
-        players: [...activePlayers.players, ...players.players],
-      };
-      // SET_STORAGE(populatePlayerList, "players");
+      if (exisingPlayers) {
+        exisingPlayers.forEach((player: any) => {
+          updatePlayer(player.value, player.games);
+        });
+      }
     } else {
       SET_STORAGE(players, "players");
     }
@@ -93,29 +131,35 @@ const GameForm = () => {
 
   return (
     <form
+      className="d-flex justify-content-center"
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit();
       }}
     >
-      <div className="d-flex mb-2">
-        <input
-          name="title"
-          className="form-control"
-          type="text"
-          onChange={(e) =>
-            dispatch({ type: "SET_TITLE", payload: { value: e.target.value } })
-          }
-          value={state.game.title}
-          placeholder="Name of the game.."
-        />
-      </div>
-      <div className="d-flex mb-2">
-        <CreatePlayer />
-      </div>
+      <div className="w-100" style={{ maxWidth: "400px" }}>
+        <div className="d-flex mb-2">
+          <input
+            name="title"
+            className="form-control"
+            type="text"
+            onChange={(e) =>
+              dispatch({
+                type: "SET_TITLE",
+                payload: { value: e.target.value },
+              })
+            }
+            value={state.game.title}
+            placeholder="Name of the game.."
+          />
+        </div>
+        <div className="d-flex mb-2">
+          <CreatePlayer />
+        </div>
 
-      <div className="d-flex w-100 mb-2">
-        <button className="btn btn-dark btn-sm w-100">Start game</button>
+        <div className="d-flex w-100 mb-2">
+          <button className="btn btn-dark btn-sm w-100">Start game</button>
+        </div>
       </div>
     </form>
   );
