@@ -9,14 +9,18 @@ import { FaCog } from "react-icons/fa";
 const BurgerMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const editMenuState = () => {
+    setIsMenuOpen((prevState) => (prevState ? false : true));
+  };
+
   return (
     <>
       <Menu
         isOpen={isMenuOpen}
         right
         disableAutoFocus
-        onClose={() => setIsMenuOpen(false)}
-        onOpen={() => setIsMenuOpen(true)}
+        onClose={() => editMenuState()}
+        onOpen={() => editMenuState()}
         customBurgerIcon={<FaCog color="white" size="0.8rem" />}
       >
         <section className="d-flex flex-column h-100 justify-content-between align-items-center">

@@ -13,12 +13,15 @@ const GameForm = () => {
   const history = useHistory();
   const gId = uuidv4();
 
-  const addToGameStorage = () => {
+  const addToGameStorage = (newGame: any, gId: string) => {
     const games = GET_STORAGE("games");
     if (games) {
-      SET_STORAGE({ gameIds: [...games.gameIds, gId] }, "games");
+      SET_STORAGE(
+        { gameIds: [...games.gameIds, newGame], activeGame: gId },
+        "games"
+      );
     } else {
-      SET_STORAGE({ gameIds: [gId] }, "games");
+      SET_STORAGE({ gameIds: [newGame], activeGame: gId }, "games");
     }
   };
 
@@ -96,7 +99,6 @@ const GameForm = () => {
       }),
     };
 
-    addToGameStorage();
     const newGame = {
       ...state.game,
       players: state.game.players.map((player) => {
@@ -131,10 +133,9 @@ const GameForm = () => {
         },
       ],
     };
-    SET_STORAGE(newGame, gId);
+    addToGameStorage(newGame, gId);
     addPlayerToPlayerList(players);
     dispatch({ type: "SET_GAME_INITIALSTATE" });
-    dispatch({ type: "CLEAR_PLAYERS" });
     dispatch({ type: "SET_ACTIVE_ID", payload: { value: gId } });
     history.push(`activegame/${gId}`);
   };

@@ -2,9 +2,9 @@ import React, { useState, useContext, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import {
-  FaAccessibleIcon,
   FaGamepad,
   FaHome,
+  FaPlus,
   FaUsers,
 } from "react-icons/fa";
 import { GlobalContext } from "../store/contexts/mainContext";
@@ -35,12 +35,12 @@ const Navbar = () => {
               <FaHome size="1.2rem" />
             </Link>
           </li>
-          <li style={{ width: "34px" }}>
+          <li className="p-1">
             <Link
-              to={`/swiper`}
+              to="/newgame"
               className="text-white btn btn-dark p-1 m-0 d-flex justify-content-center align-items-center"
             >
-              <FaAccessibleIcon size="1.2rem"/>
+              <FaPlus size="1.2rem" />
             </Link>
           </li>
         </div>
@@ -67,11 +67,10 @@ const Navbar = () => {
               to={`/userlist`}
               className="text-white btn btn-dark p-1 m-0 d-flex justify-content-center align-items-center"
             >
-              <FaUsers size="1.2rem"/>
+              <FaUsers size="1.2rem" />
             </Link>
           </li>
-          <li style={{ width: "34px" }}>
-          </li>
+          <li style={{ width: "34px" }}></li>
         </div>
       </ul>
     </nav>

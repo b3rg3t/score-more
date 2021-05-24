@@ -1,48 +1,37 @@
 /* Position and sizing of burger button */
-.custom-burger-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-}
-
 .bm-burger-button {
-  position: absolute;
+  position: fixed;
   width: 30px;
   height: 20px;
   top: 5.5px;
   right: 8px;
-  border-radius: 4px;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  border-radius: 10px;
-  max-height: 4px;
+  background: #373a47;
 }
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-  background:lightgray;
+  background: #a90000;
 }
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #000000;
+  background: #bdc3c7;
 }
 
 /*
-  Sidebar wrapper styles
-  Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
-  */
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
@@ -50,8 +39,9 @@
 
 /* General sidebar styles */
 .bm-menu {
-  background: white;
-  font-size: 1rem;
+  background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -61,17 +51,16 @@
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: Black;
-  display: flex;
-  flex-direction: column;
+  color: #b8b7ad;
+  padding: 0.8em;
 }
 
 /* Individual item */
 .bm-item {
   display: inline-block;
-  margin-bottom: 1rem;
 }
 
-.burger-heading {
-  outline: none;
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
 }

@@ -1,30 +1,36 @@
 import React, { useState, useEffect, useRef } from "react";
-import PlayerList from "./PlayerList";
 
 import { GET_STORAGE } from "../../utils/localStorage";
 import Loader from "../../Loader";
 
-import {
-  FaFlagCheckered,
-} from "react-icons/fa";
+import { FaFlagCheckered } from "react-icons/fa";
 import Modal from "../../Modal";
 
-const ActiveGame = ({ id }: any) => {
+interface ActiveGameProps {
+  id: string;
+  gameId: string;
+  addNewSlide?: () => void;
+}
+
+const ActiveGame = ({ id }: ActiveGameProps) => {
   const [game, setGame] = useState({} as any);
   const [isLoading, setIsLoading] = useState(true);
-  const [update, setUpdate] = useState(false);
-
   useEffect(() => {
     setIsLoading(true);
     try {
-      const getGame = GET_STORAGE(id);
-      setGame(getGame);
-      setIsLoading(false);
+      const getGames = GET_STORAGE("games");
+      if (getGames) {
+        const activeGame = getGames.gameIds.find((gameId: any) => {
+          return gameId.id === id;
+        });
+        setGame(activeGame);
+        setIsLoading(false);
+      }
     } catch (err) {
       console.log(err);
     }
     // eslint-disable-next-line
-  }, [update]);
+  }, []);
 
   const modalRef = useRef();
 
@@ -41,9 +47,6 @@ const ActiveGame = ({ id }: any) => {
     }
   };
 
-  const updateListCallback = () => {
-    setUpdate((prevState) => (prevState ? false : true));
-  };
 
   if (isLoading) {
     return <Loader />;
@@ -58,7 +61,7 @@ const ActiveGame = ({ id }: any) => {
             </button>
           </div>
         </Modal>
-        <section className="player-list-section ">
+        <section className="player-list-section">
           <div className="d-flex justify-content-between align-items-center px-2 mt-1">
             <span
               className="box-shadow bg-dark text-white border-dark rounded d-flex align-items-center justify-content-center px-3 mr-1"
@@ -76,11 +79,6 @@ const ActiveGame = ({ id }: any) => {
               <FaFlagCheckered />
             </button>
           </div>
-          <PlayerList
-            id={id}
-            updateListCallback={updateListCallback}
-            activeGame={game}
-          />
         </section>
       </>
     );

@@ -118,6 +118,7 @@ $neon-color: rgb(255, 0, 221);
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 999999;
 }
 
 .modal-backdrop {
@@ -141,5 +142,5 @@ $neon-color: rgb(255, 0, 221);
   transform: translate(-50%, -50%);
   overflow-y: auto;
   background-color: white;
-  z-index: 101;
+  z-index: 1010;
 }

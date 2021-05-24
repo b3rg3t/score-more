@@ -4,26 +4,20 @@ import { GET_STORAGE } from "../../utils/localStorage";
 import { Link } from "react-router-dom";
 
 const GameList = (): React.ReactElement => {
-  const [games, setGames] = useState([]);
+  const [games, setGames] = useState([] as any);
+
 
   useEffect(() => {
     const storageGames = GET_STORAGE("games");
-    if (storageGames) {
-      setGames(storageGames.gameIds);
+    if(storageGames?.gameIds?.length){
+      setGames(storageGames.gameIds)
     }
-  }, []);
-
-  const fetchedGames = games.map((game: any) => {
-    const allGames = GET_STORAGE(game);
-    if (allGames) {
-      return allGames;
-    }
-    return null;
-  });
-  if (fetchedGames.length) {
+  }, [])
+  
+  if (games.length) {
     return (
       <ul className="list-unstyled">
-        {fetchedGames.map((game: any) => (
+        {games.map((game: any) => (
           <GameCard key={game.id} game={game} />
         ))}
       </ul>

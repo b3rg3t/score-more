@@ -10,7 +10,8 @@ import "./App.scss";
 
 import { GlobalProvider } from "./store/contexts/mainContext";
 import Swiper from "./components/pages/Swiper";
-import DisplayUserList from "./components/lists/DisplayUserList";
+import UserList from "./components/pages/UserList";
+import UserProfile from "./components/pages/UserProfile";
 
 function App() {
   return (
@@ -21,10 +22,12 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/newgame" component={NewGame} />
-            <Route exact path="/userlist" component={DisplayUserList} />
+            <Route exact path="/userlist" component={UserList} />
+            <Route exact path="/user-profile" component={UserProfile} />
             <Route exact path="/activegame/:id" component={Game} />
             <Route exact path="/activegame/:id/:gameId" component={Game} />
             <Route exact path="/swiper" component={Swiper} />
+            <Route exact path="/game/:id/:gameId" component={Swiper} />
           </Switch>
         </Router>
       </main>

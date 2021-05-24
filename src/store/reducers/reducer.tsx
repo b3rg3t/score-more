@@ -49,17 +49,6 @@ const GameReducer = (state: any, action: any) => {
 };
 const PlayerReducer = (state: any, action: any) => {
   switch (action.type) {
-    // case "ADD_PLAYER":
-    //   return [...state, action.payload.value];
-
-    // case "SET_PLAYERS":
-    //   return action.payload.value;
-
-    // case "CLEAR_PLAYERS":
-    //   return [];
-
-    // case "REMOVE_PLAYER":
-    //   return state.filter((s: any) => s.value !== action.payload.value);
 
     default:
       return state;
