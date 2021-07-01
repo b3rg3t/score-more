@@ -16,7 +16,7 @@ const GameList = (): React.ReactElement => {
   
   if (games.length) {
     return (
-      <ul className="list-unstyled">
+      <ul className="game-list list-unstyled">
         {games.map((game: any) => (
           <GameCard key={game.id} game={game} />
         ))}

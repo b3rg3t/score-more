@@ -70,6 +70,14 @@ $neon-color: rgb(255, 0, 221);
   }
 }
 
+.game-list {
+  .game-card {
+    &:hover {
+      background-color: rgb(223, 252, 252);
+    }
+  }
+}
+
 .addPlayer__multi-value {
   margin: 0;
   &:nth-child(n + 2) {

@@ -1,11 +1,14 @@
-import React, { useContext } from "react";
-import { FaChevronRight, FaEllipsisV } from "react-icons/fa";
+import React, { useState, useRef, useContext } from "react";
+import { FaChevronRight, FaCog, FaEllipsisV, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../../../store/contexts/mainContext";
 import { GET_STORAGE, SET_STORAGE } from "../../utils/localStorage";
+import DropDownMenu from "../../utils/DropDownMenu";
+import { useOutsideClick } from "../../utils/customHooks";
 
 const GameCard = ({ game }: any) => {
   const { dispatch } = useContext(GlobalContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const setActiveGame = () => {
     const games = GET_STORAGE("games");
@@ -15,15 +18,47 @@ const GameCard = ({ game }: any) => {
     }
   };
 
+  const menuRef = useRef(null);
+
+  useOutsideClick(menuRef, () => {
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  });
+
+  const onClickDeleteButton = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <li className="box-shadow p-2 d-flex justify-content-between rounded mb-2">
-      <div className="d-flex justify-content-center align-items-center">
+      <div className="d-flex justify-content-center align-items-center position-relative">
         <button
+          onClick={() =>
+            setIsMenuOpen((prevState) => (prevState ? false : true))
+          }
           className="btn btn-link btn-sm rounded-circle mr-2 d-flex align-items-center"
           style={{ height: "32px" }}
         >
           <FaEllipsisV color="gray" />
         </button>
+        {isMenuOpen && (
+          <DropDownMenu positionX="left" menuRef={menuRef}>
+            <ul className="list-unstyled ">
+              <li
+                className="game-card px-3 py-2 d-flex align-items-center rounded"
+                onClick={() => onClickDeleteButton()}
+              >
+                <FaTrashAlt className="pr-1" color="red"/>
+                <span className="ml-1">Delete</span>
+              </li>
+              <li className="game-card px-3 py-2 d-flex align-items-center rounded">
+                <FaCog className="pr-1" color="gray" />
+                <span className="ml-1">Settings</span>
+              </li>
+            </ul>
+          </DropDownMenu>
+        )}
       </div>
 
       <div className="d-flex w-100 flex-column ">

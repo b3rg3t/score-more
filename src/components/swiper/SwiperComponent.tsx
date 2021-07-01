@@ -80,7 +80,7 @@ const updateActiveSwiper = (s: any) => {
   window.history.replaceState(
     null,
     "Viewdoc",
-    `/game/${id}/${activeSlide.id}`
+    `/game/${id}/${activeSlide?.id}`
   );
 }
 

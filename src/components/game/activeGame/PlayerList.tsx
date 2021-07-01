@@ -70,6 +70,7 @@ const PlayerList = ({
       }),
     };
     SET_STORAGE(updatedGame, "games");
+    // addNewSlide();
   };
 
   const onSubmit = (data: any) => {
@@ -96,7 +97,6 @@ const PlayerList = ({
     };
 
     updateRoundScore(activeGame.id, setScoreToRound, newRound);
-    // addNewSlide();
   };
 
   const openModal = () => {
@@ -143,7 +143,7 @@ const PlayerList = ({
         <form onSubmit={handleSubmit(onSubmit)}>
           <ul className="list-unstyled overflow-auto p-2">
             {players?.length &&
-              activeGame.playerScore.map((player: any) => (
+              activeGame?.playerScore?.map((player: any) => (
                 <PlayerItem
                   key={player.pId}
                   player={players.find((pId: any) => pId.value === player.pId)}

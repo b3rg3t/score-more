@@ -23,7 +23,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/newgame" component={NewGame} />
             <Route exact path="/userlist" component={UserList} />
-            <Route exact path="/user-profile" component={UserProfile} />
+            <Route exact path="/user/:id" component={UserProfile} />
             <Route exact path="/activegame/:id" component={Game} />
             <Route exact path="/activegame/:id/:gameId" component={Game} />
             <Route exact path="/swiper" component={Swiper} />
