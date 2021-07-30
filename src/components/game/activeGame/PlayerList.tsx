@@ -6,15 +6,15 @@ import { v4 as uuidv4 } from "uuid";
 import PlayerItem from "./PlayerItem";
 import { GET_STORAGE, SET_STORAGE } from "../../utils/localStorage";
 
-import { FaFlagCheckered } from "react-icons/fa";
+import { FaFlagCheckered, FaTrashAlt } from "react-icons/fa";
 import Modal from "../../Modal";
 
 interface PlayerListProps {
   id: string;
-  gameId: string;
+  gameId?: string;
   activeGame: any;
-  isActiveRound: boolean;
-  addNewSlide: any;
+  isActiveRound?: boolean;
+  addNewSlide?: any;
 }
 
 const PlayerList = ({
@@ -38,7 +38,7 @@ const PlayerList = ({
       setPlayers(allPlayers.players);
       getGameScore();
     }
-     // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   const getGameScore = () => {
@@ -70,6 +70,7 @@ const PlayerList = ({
       }),
     };
     SET_STORAGE(updatedGame, "games");
+    addNewSlide();
     // addNewSlide();
   };
 
@@ -99,6 +100,16 @@ const PlayerList = ({
     updateRoundScore(activeGame.id, setScoreToRound, newRound);
   };
 
+  const deleteRound = () => {
+    console.log("here", activeGame);
+
+    const filteredGames = game.round.filter(
+      (aGame: any) => activeGame.id !== aGame.id
+    );
+      console.log(filteredGames)
+    addNewSlide();
+  };
+
   const openModal = () => {
     if (modalRef) {
       //@ts-ignore
@@ -112,14 +123,26 @@ const PlayerList = ({
     }
   };
 
+  console.log(game);
+
   return (
     <>
       <Modal ref={modalRef}>
         <div className="d-flex flex-column align-items-center">
-          <h5>Finish game?</h5>
-          <button className="btn btn-light" onClick={() => closeModal()}>
-            Close
+          <button
+            className="btn btn-link position-absolute"
+            onClick={() => closeModal()}
+            style={{ top: 0, right: 0 }}
+          >
+            X
           </button>
+          <h5>Game finished?</h5>
+          <div className="d-flex">
+            <button className="btn btn-dark mr-1">Yes</button>
+            <button className="btn btn-light ml-1" onClick={() => closeModal()}>
+              Close
+            </button>
+          </div>
         </div>
       </Modal>
       <section className="player-list-section">
@@ -129,16 +152,26 @@ const PlayerList = ({
             style={{ height: "24px" }}
           >
             <small className="font-weight-bold">
-              Round: {activeGame.round}
+              Round: {activeGame?.round}
             </small>
           </span>
-          <button
-            title="Finish game"
-            className="box-shadow btn btn-outline-dark btn-sm d-flex justify-content-center align-items-center"
-            onClick={() => openModal()}
-          >
-            <FaFlagCheckered />
-          </button>
+          <div className="d-flex">
+            <button
+              className="btn btn-sm btn-outline-danger box-shadow mr-2 d-flex justify-content-center align-items-center"
+              type="button"
+              onClick={() => deleteRound()}
+            >
+              <FaTrashAlt />
+            </button>
+            <button
+              title="Finish game"
+              type="button"
+              className="box-shadow btn btn-outline-dark btn-sm d-flex justify-content-center align-items-center"
+              onClick={() => openModal()}
+            >
+              <FaFlagCheckered />
+            </button>
+          </div>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <ul className="list-unstyled overflow-auto p-2">

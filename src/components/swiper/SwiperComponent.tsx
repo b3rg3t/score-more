@@ -22,10 +22,10 @@ const SwiperComponent = ({ id, gameId }: any) => {
   const [swiper, setSwiper] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const addNewSlide = () => {
-    setIsLoading(true);
-    setSlides((prevState) => [...prevState, `Slide ${prevState.length + 1}`]);
-  };
+  // const addNewSlide = () => {
+  //   setIsLoading(true);
+  //   setSlides((prevState) => [...prevState, `Slide ${prevState.length + 1}`]);
+  // };
 
   useEffect(() => {
     const games = GET_STORAGE("games");
@@ -68,7 +68,7 @@ const SwiperComponent = ({ id, gameId }: any) => {
           id={id}
           activeGame={slide}
           isActiveRound={isActiveRound === slide.id ? true : false}
-          addNewSlide={addNewSlide}
+          // addNewSlide={addNewSlide}
         />
       </div>
     </SwiperSlide>

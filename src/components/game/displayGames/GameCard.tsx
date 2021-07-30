@@ -78,7 +78,7 @@ const GameCard = ({ game }: any) => {
         </div>
       </div>
       <div className="d-flex justify-content-between align-items-center">
-        <Link to={`/activegame/${game.id}`}>
+        <Link to={`/activegame/${game.id}/${game.activeRound.id}`}>
           <button
             className="btn btn-link round d-flex align-items-center"
             onClick={() => setActiveGame()}
