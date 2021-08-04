@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import PlayerItem from "./PlayerItem";
 import { GET_STORAGE, SET_STORAGE } from "../../utils/localStorage";
 
-import { FaFlagCheckered, FaTrashAlt } from "react-icons/fa";
+import { FaFlagCheckered, FaTimes, FaTrashAlt } from "react-icons/fa";
 import Modal from "../../Modal";
 
 interface PlayerListProps {
@@ -71,7 +71,7 @@ const PlayerList = ({
       }),
     };
     SET_STORAGE(updatedGame, "games");
-    addNewSlide();
+    addNewSlide && addNewSlide();
     // addNewSlide();
   };
 
@@ -102,8 +102,6 @@ const PlayerList = ({
   };
 
   const deleteRound = () => {
-    console.log("here", activeGame);
-
     setDeleteItem({ id: activeGame.id, label: activeGame.round });
     openModal();
   };
@@ -112,7 +110,6 @@ const PlayerList = ({
     const filteredGames = game.round.filter(
       (aGame: any) => activeGame.id !== aGame.id
     );
-    console.log(filteredGames);
 
     const updatedGame = {
       ...allGames,
@@ -123,7 +120,8 @@ const PlayerList = ({
             ...gajm,
             round: filteredGames,
             activeRound:
-              filteredGames.length && filteredGames[filteredGames.length - 1].id,
+              filteredGames.length &&
+              filteredGames[filteredGames.length - 1].id,
           };
         } else {
           return { ...gajm };
@@ -131,8 +129,42 @@ const PlayerList = ({
       }),
     };
     SET_STORAGE(updatedGame, "games");
-    addNewSlide();
+    addNewSlide && addNewSlide();
   };
+
+  const finishGame = () => {
+    const otherGames = allGames.gameIds.filter((aGame: any) => aGame.id !== id);
+    const updatedGame = [
+      {
+        ...game,
+        isActive: false,
+      },
+      ...otherGames,
+    ];
+
+    const updateGameStatus = {
+      activeGame: activeGame.id,
+      gameIds: updatedGame,
+    };
+    SET_STORAGE(updateGameStatus, "games");
+  };
+
+ const  reActivateGame = () => {
+  const otherGames = allGames.gameIds.filter((aGame: any) => aGame.id !== id);
+  const updatedGame = [
+    {
+      ...game,
+      isActive: true,
+    },
+    ...otherGames,
+  ];
+
+  const updateGameStatus = {
+    activeGame: activeGame.id,
+    gameIds: updatedGame,
+  };
+  SET_STORAGE(updateGameStatus, "games");
+ }
 
   const openModal = () => {
     if (modalRef) {
@@ -147,19 +179,17 @@ const PlayerList = ({
       setDeleteItem({ id: null, label: null });
     }
   };
-
   console.log(game);
-
   return (
     <>
       <Modal ref={modalRef}>
         <div className="d-flex flex-column align-items-center">
           <button
-            className="btn btn-link position-absolute"
+            className="btn btn-link btn-sm position-absolute"
             onClick={() => closeModal()}
             style={{ top: 0, right: 0 }}
           >
-            X
+            <FaTimes />
           </button>
           {deleteItem?.id ? (
             <h5>Delete round {deleteItem.label}?</h5>
@@ -169,13 +199,13 @@ const PlayerList = ({
           <div className="d-flex">
             <button
               className="btn btn-dark mr-1"
-              onClick={() => (deleteItem?.id ? removeRound() : "")}
+              onClick={() => (deleteItem?.id ? removeRound() : finishGame())}
             >
               Yes
             </button>
 
             <button className="btn btn-light ml-1" onClick={() => closeModal()}>
-              Close
+              Cancel
             </button>
           </div>
         </div>
@@ -220,15 +250,26 @@ const PlayerList = ({
                   player={players.find((pId: any) => pId.value === player.pId)}
                   score={player.score}
                   register={register}
+                  showScoreButtons={
+                    isActiveRound && game.isActive ? true : false
+                  }
                 />
               ))}
           </ul>
-          {isActiveRound && (
+          {isActiveRound && game?.isActive ? (
             <div className="d-flex justify-content-center">
               <button className="btn btn-dark" type="submit">
                 New round
               </button>
             </div>
+          ) : (
+            isActiveRound && (
+              <div className="d-flex justify-content-center">
+                <button type="button" className="btn btn-dark" onClick={() => reActivateGame()}>
+                 Reactivate game
+                </button>
+              </div>
+            )
           )}
         </form>
       </section>

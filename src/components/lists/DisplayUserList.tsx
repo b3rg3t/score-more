@@ -16,11 +16,14 @@ const DisplayUserList = () => {
   }, []);
 
   return (
-    <section>
-      <h4 className="text-center mt-1 mb-0">
-        <code>Userlist</code>
-      </h4>
-      <ul className="list-unstyled p-2">
+    <section className="px-2">
+        <div className="pl-2 mb-2 border-bottom d-flex justify-content-center align-items-center">
+          <h5 className="mb-0 py-1">
+            Users
+          </h5>
+
+        </div>
+      <ul className="list-unstyled">
         {users &&
           users.map((user: any) => (
             <li

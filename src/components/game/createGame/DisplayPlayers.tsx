@@ -26,7 +26,7 @@ const DisplayPlayers = () => {
       ))}
     </ul>
   ) : (
-    <div>Add players maaan</div>
+    <></>
   );
 };
 

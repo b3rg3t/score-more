@@ -7,9 +7,15 @@ interface PlayerItemProps {
   player: any;
   register: any;
   score: number;
+  showScoreButtons: boolean;
 }
 
-const PlayerItem = ({ player, register, score }: PlayerItemProps) => {
+const PlayerItem = ({
+  player,
+  register,
+  score,
+  showScoreButtons,
+}: PlayerItemProps) => {
   const [counter, setCounter] = useState(score);
 
   return (
@@ -26,6 +32,7 @@ const PlayerItem = ({ player, register, score }: PlayerItemProps) => {
       </div>
       <div className="d-flex justify-content-center align-items-center">
         <button
+          disabled={!showScoreButtons}
           type="button"
           className="btn btn-dark btn-sm d-flex align-items-center justify-content-center rounded-circle"
           onClick={() => setCounter((prevState: number) => prevState - 1)}
@@ -33,6 +40,7 @@ const PlayerItem = ({ player, register, score }: PlayerItemProps) => {
         >
           <FaMinus size="1rem" />
         </button>
+
         <input
           type="number"
           name={player.value}
@@ -42,7 +50,9 @@ const PlayerItem = ({ player, register, score }: PlayerItemProps) => {
           ref={register()}
         />
         <span className="mx-2 d-flex align-items-center">{counter}</span>
+
         <button
+          disabled={!showScoreButtons}
           type="button"
           className="btn btn-dark btn-sm d-flex align-items-center justify-content-center rounded-circle"
           onClick={() => setCounter((prevState) => prevState + 1)}

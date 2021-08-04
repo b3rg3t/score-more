@@ -31,7 +31,7 @@ const GameCard = ({ game }: any) => {
   };
 
   return (
-    <li className="box-shadow p-2 d-flex justify-content-between rounded mb-2">
+    <li className={`box-shadow p-2 d-flex justify-content-between rounded mb-2 ${!game.isActive ? "bg-light" : ""}`}>
       <div className="d-flex justify-content-center align-items-center position-relative">
         <button
           onClick={() =>
@@ -69,7 +69,7 @@ const GameCard = ({ game }: any) => {
           }
         >
           <h5 className="card-title mb-1">
-            <code>{game.title}</code>
+            <code className={`${game.isActive ? "" : "text-muted"}`}>{game.title}</code>
           </h5>
         </Link>
         <div className="d-flex justify-content-between pr-2">

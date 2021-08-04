@@ -169,7 +169,16 @@ const GameForm = () => {
         </div>
 
         <div className="d-flex w-100 mb-2">
-          <button className="btn btn-dark btn-sm w-100">Start game</button>
+          <button
+            className="btn btn-dark btn-sm w-100"
+            disabled={
+              (!state.game.players.length && state.game.title.length > 0)
+                ? true
+                : false
+            }
+          >
+            Start game
+          </button>
         </div>
       </div>
     </form>
