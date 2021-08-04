@@ -29,6 +29,7 @@ const PlayerList = ({
   const [game, setGame] = useState(null as any);
   const [allGames, setAllGames] = useState(null as any);
   const [players, setPlayers] = useState([]);
+  const [deleteItem, setDeleteItem] = useState({ id: null, label: null });
 
   const modalRef = useRef();
 
@@ -103,10 +104,33 @@ const PlayerList = ({
   const deleteRound = () => {
     console.log("here", activeGame);
 
+    setDeleteItem({ id: activeGame.id, label: activeGame.round });
+    openModal();
+  };
+
+  const removeRound = () => {
     const filteredGames = game.round.filter(
       (aGame: any) => activeGame.id !== aGame.id
     );
-      console.log(filteredGames)
+    console.log(filteredGames);
+
+    const updatedGame = {
+      ...allGames,
+      ...game,
+      gameIds: allGames.gameIds.map((gajm: any) => {
+        if (gajm.id === id) {
+          return {
+            ...gajm,
+            round: filteredGames,
+            activeRound:
+              filteredGames.length && filteredGames[filteredGames.length - 1].id,
+          };
+        } else {
+          return { ...gajm };
+        }
+      }),
+    };
+    SET_STORAGE(updatedGame, "games");
     addNewSlide();
   };
 
@@ -120,6 +144,7 @@ const PlayerList = ({
     if (modalRef) {
       //@ts-ignore
       modalRef.current.close();
+      setDeleteItem({ id: null, label: null });
     }
   };
 
@@ -136,9 +161,19 @@ const PlayerList = ({
           >
             X
           </button>
-          <h5>Game finished?</h5>
+          {deleteItem?.id ? (
+            <h5>Delete round {deleteItem.label}?</h5>
+          ) : (
+            <h5>Game finished?</h5>
+          )}
           <div className="d-flex">
-            <button className="btn btn-dark mr-1">Yes</button>
+            <button
+              className="btn btn-dark mr-1"
+              onClick={() => (deleteItem?.id ? removeRound() : "")}
+            >
+              Yes
+            </button>
+
             <button className="btn btn-light ml-1" onClick={() => closeModal()}>
               Close
             </button>
@@ -167,7 +202,10 @@ const PlayerList = ({
               title="Finish game"
               type="button"
               className="box-shadow btn btn-outline-dark btn-sm d-flex justify-content-center align-items-center"
-              onClick={() => openModal()}
+              onClick={() => {
+                setDeleteItem({ id: null, label: null });
+                openModal();
+              }}
             >
               <FaFlagCheckered />
             </button>
