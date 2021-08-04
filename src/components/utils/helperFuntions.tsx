@@ -1,3 +1,5 @@
+import { GET_STORAGE } from "./localStorage";
+
 const CheckURL = () => {
   let BASE_URL: any;
   if (
@@ -11,4 +13,14 @@ const CheckURL = () => {
   return BASE_URL;
 };
 
-export { CheckURL };
+
+const GetGames = () => {
+  const storageGames = GET_STORAGE("games");
+  if (storageGames?.gameIds?.length) {
+   return storageGames.gameIds;
+  } else {
+    return [];
+  }
+}
+
+export { CheckURL, GetGames };

@@ -1,12 +1,24 @@
 import React, { useState, useRef, useContext } from "react";
-import { FaChevronRight, FaCog, FaEllipsisV, FaTrashAlt } from "react-icons/fa";
+import {
+  FaChevronRight,
+  FaCog,
+  FaEllipsisV,
+  FaFlagCheckered,
+  FaTrashAlt,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../../../store/contexts/mainContext";
 import { GET_STORAGE, SET_STORAGE } from "../../utils/localStorage";
 import DropDownMenu from "../../utils/DropDownMenu";
 import { useOutsideClick } from "../../utils/customHooks";
+import { GetGames } from "../../utils/helperFuntions";
 
-const GameCard = ({ game }: any) => {
+interface GameCardProps {
+  game: any;
+  updateGames?: () => void;
+}
+
+const GameCard = ({ game, updateGames }: GameCardProps) => {
   const { dispatch } = useContext(GlobalContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -28,10 +40,30 @@ const GameCard = ({ game }: any) => {
 
   const onClickDeleteButton = () => {
     setIsMenuOpen(false);
+    const allGames = GetGames();
+    const games = GET_STORAGE("games");
+    if (allGames) {
+      const filteredGames = allGames.length
+        ? allGames.filter((aGame: any) => {
+            return aGame.id !== game.id;
+          })
+        : [];
+      console.log(filteredGames, games);
+      const updatedGames = {
+        ...games,
+        gameIds: filteredGames,
+      };
+      SET_STORAGE(updatedGames, "games");
+      updateGames && updateGames();
+    }
   };
 
   return (
-    <li className={`box-shadow p-2 d-flex justify-content-between rounded mb-2 ${!game.isActive ? "bg-light" : ""}`}>
+    <li
+      className={`box-shadow p-2 d-flex justify-content-between rounded mb-2 ${
+        !game.isActive ? "bg-light" : ""
+      }`}
+    >
       <div className="d-flex justify-content-center align-items-center position-relative">
         <button
           onClick={() =>
@@ -45,16 +77,20 @@ const GameCard = ({ game }: any) => {
         {isMenuOpen && (
           <DropDownMenu positionX="left" menuRef={menuRef}>
             <ul className="list-unstyled ">
+              <li className="game-card px-3 py-2 d-flex align-items-center rounded">
+                <FaCog className="pr-1" color="gray" />
+                <span className="ml-1">Settings</span>
+              </li>
+              <li className="game-card px-3 py-2 d-flex align-items-center rounded">
+                <FaFlagCheckered className="pr-1" color="black" />
+                <span className="ml-1">Finish</span>
+              </li>
               <li
                 className="game-card px-3 py-2 d-flex align-items-center rounded"
                 onClick={() => onClickDeleteButton()}
               >
-                <FaTrashAlt className="pr-1" color="red"/>
+                <FaTrashAlt className="pr-1" color="red" />
                 <span className="ml-1">Delete</span>
-              </li>
-              <li className="game-card px-3 py-2 d-flex align-items-center rounded">
-                <FaCog className="pr-1" color="gray" />
-                <span className="ml-1">Settings</span>
               </li>
             </ul>
           </DropDownMenu>
@@ -69,7 +105,9 @@ const GameCard = ({ game }: any) => {
           }
         >
           <h5 className="card-title mb-1">
-            <code className={`${game.isActive ? "" : "text-muted"}`}>{game.title}</code>
+            <code className={`${game.isActive ? "" : "text-muted"}`}>
+              {game.title}
+            </code>
           </h5>
         </Link>
         <div className="d-flex justify-content-between pr-2">

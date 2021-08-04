@@ -11,6 +11,7 @@ import { GET_STORAGE } from "../utils/localStorage";
 import GameCard from "../game/displayGames/GameCard";
 import EditUser from "./EditUser";
 import ProfilePic from "../../images/profile2.png";
+import ScoreInfo from "./ScoreInfo";
 interface DisplayUsersGamesProps {
   id: string;
 }
@@ -56,8 +57,8 @@ const DisplayUsersGames = ({ id }: DisplayUsersGamesProps) => {
 
   return (
     <section className="d-flex flex-column px-1">
-      <div className="d-flex justify-content-between p-1 border-bottom align-items-center">
-        <div>
+      <div className="d-flex justify-content-between p-1 border-bottom align-items-center mt-2">
+        <div className="d-flex align-items-center">
           <img
             className="rounded-circle border border-secondary mr-2 p-1"
             width="22px"
@@ -65,19 +66,23 @@ const DisplayUsersGames = ({ id }: DisplayUsersGamesProps) => {
             alt="img of profile"
             src={`${ProfilePic}`}
           />
-          <code onClick={() => editUserProfile()}>
-            <b>{user?.label.toUpperCase()}</b>
-          </code>
+          <h5 className="d-flex align-items-center mb-0">
+            <code onClick={() => editUserProfile()}>
+              <b>{user?.label.toUpperCase()}</b>
+            </code>
+          </h5>
         </div>
         <button
-          className={`btn ${!editUser ? "btn-primary" : "btn-outline-primary"} btn-sm d-flex align-items-center`}
+          className={`btn ${
+            !editUser ? "btn-primary" : "btn-outline-primary"
+          } btn-sm d-flex align-items-center`}
           onClick={() => setEditUser((prevState) => (prevState ? false : true))}
         >
           {!editUser ? <FaEdit /> : <FaSave />}
         </button>
       </div>
       {editUser && <EditUser />}
-
+      <ScoreInfo wins={0} losses={1} equal={3} />
       <section>
         <div className="pl-2 mb-2 border-bottom d-flex justify-content-between align-items-center">
           <h6 className="mb-0">
